@@ -5,101 +5,188 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meetiline · Get a meeting ready for AI</title>
 <meta name="description" content="Meetiline turns a meeting recording into the key screenshots with exact times and a transcript, packed for ChatGPT, Claude or any AI. Runs on your Mac. Nothing is uploaded.">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Meetiline · Get a meeting ready for AI">
 <meta property="og:description" content="Key screenshots with exact times and the transcript under each, packed for any AI. Private, on your Mac.">
 <meta property="og:image" content="https://meetiline.vercel.app/app.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#181818">
 <link rel="icon" href="favicon.png">
 <style>
   :root {
     --bg: #181818; --surface: #1f1f1f; --raised: #282828; --border: #303030;
-    --text: #f2f2f3; --muted: #9a9aa0; --faint: #6e6e74; --blue: #0a84ff; --green: #5ccb94;
+    --text: #f2f2f3; --muted: #a0a0a6; --faint: #7a7a80; --blue: #0a84ff; --green: #5ccb94;
     color-scheme: dark;
   }
   @media (prefers-color-scheme: light) {
-    :root { --bg: #eeeef0; --surface: #ffffff; --raised: #f5f5f6; --border: #dadadd; --text: #18181b; --muted: #5d5d63; --faint: #8a8a90; color-scheme: light; }
+    :root { --bg: #f3f3f5; --surface: #ffffff; --raised: #efeff1; --border: #dcdce0; --text: #18181b; --muted: #55555c; --faint: #7d7d84; color-scheme: light; }
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+  .skip { position: absolute; left: 12px; top: -48px; background: var(--blue); color: #fff; padding: 8px 14px; border-radius: 8px; z-index: 10; text-decoration: none; }
+  .skip:focus { top: 12px; }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
-  header.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+
+  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; }
-  .brand img { width: 30px; height: 30px; }
-  .top a.link { color: var(--muted); text-decoration: none; font-size: 14px; }
-  .hero { text-align: center; padding: 56px 0 40px; }
-  .hero { position: relative; }
-  .hero::before { content: ""; position: absolute; left: 50%; top: 20px; width: 360px; height: 360px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(10,132,255,.22), transparent); pointer-events: none; }
+  .brand img { width: 28px; height: 28px; }
+  nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
+  nav a { color: var(--muted); text-decoration: none; }
+  nav a:hover { color: var(--text); }
+  nav .pill { color: #fff; background: var(--blue); padding: 7px 14px; border-radius: 999px; font-weight: 600; }
+  nav .pill:hover { color: #fff; filter: brightness(1.08); }
+  @media (max-width: 640px) { nav a:not(.pill) { display: none; } }
+
+  .hero { text-align: center; padding: 48px 0 8px; position: relative; }
+  .hero::before { content: ""; position: absolute; left: 50%; top: 0; width: 420px; height: 420px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(10,132,255,.20), transparent); pointer-events: none; }
   .hero > * { position: relative; }
-  .hero img.icon { width: 132px; height: 132px; filter: drop-shadow(0 14px 22px rgba(0,0,0,.45)); }
-  h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.03em; margin: 22px 0 12px; }
-  .sub { color: var(--muted); font-size: clamp(17px, 2.4vw, 21px); margin: 0 auto 28px; max-width: 560px; }
-  .button { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; font-weight: 600; font-size: 17px; padding: 14px 26px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; }
+  .hero img.icon { width: 124px; height: 124px; filter: drop-shadow(0 14px 22px rgba(0,0,0,.45)); }
+  h1 { font-size: clamp(36px, 7vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin: 20px 0 14px; text-wrap: balance; }
+  .sub { color: var(--muted); font-size: clamp(17px, 2.4vw, 21px); margin: 0 auto 28px; max-width: 580px; text-wrap: balance; }
+  .button { display: inline-flex; align-items: center; gap: 9px; background: var(--blue); color: #fff; font-weight: 600; font-size: 17px; padding: 14px 28px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; box-shadow: 0 8px 24px rgba(10,132,255,.35); }
   .button:hover { filter: brightness(1.08); transform: translateY(-1px); }
-  .meta { color: var(--faint); font-size: 13.5px; margin-top: 14px; }
-  .shot { margin: 28px auto 0; }
+  .button:active { transform: none; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+  .badge { font-size: 12.5px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; }
+  .hint { color: var(--faint); font-size: 13.5px; margin-top: 12px; }
+  .hint a { color: var(--muted); }
+  .shot { margin: 40px auto 0; }
   .shot img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); }
-  .shot figcaption { color: var(--faint); font-size: 12.5px; margin-top: 10px; text-align: center; }
-  section { padding: 64px 0 0; }
-  h2 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 22px; text-align: center; }
+  .shot figcaption { color: var(--faint); font-size: 12.5px; margin-top: 12px; text-align: center; }
+
+  section { padding: 76px 0 0; }
+  .eyebrow { text-align: center; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
+  h2 { font-size: clamp(26px, 4vw, 34px); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 26px; text-align: center; text-wrap: balance; }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px; }
-  .card img { width: 100%; height: auto; display: block; border-radius: 12px; margin-bottom: 12px; }
-  .card h3 { margin: 0 0 4px; font-size: 17px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px; }
+  .card .art { aspect-ratio: 960 / 680; background: var(--raised); border-radius: 12px; margin-bottom: 14px; overflow: hidden; display: grid; place-items: center; }
+  .card .art img, .card .art svg { width: 100%; height: 100%; display: block; object-fit: contain; }
+  .card h3 { margin: 0 0 4px; font-size: 17px; display: flex; gap: 10px; align-items: center; }
+  .card h3 i { font-style: normal; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
   .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
   .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
   .fact { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
   .fact b { display: block; font-size: 15.5px; }
   .fact span { color: var(--muted); font-size: 14px; }
   .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--green); margin-top: 7px; }
-  ol.first { list-style: none; counter-reset: n; margin: 0 auto; padding: 0; max-width: 640px; display: grid; gap: 10px; }
-  ol.first li { counter-increment: n; display: flex; gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; font-size: 15.5px; }
-  ol.first li::before { content: counter(n); flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--raised); display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--muted); }
-  .note { text-align: center; color: var(--faint); font-size: 13.5px; margin-top: 14px; }
-  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; font-size: 14.5px; }
-  td { padding: 11px 16px; border-top: 1px solid var(--border); vertical-align: top; }
-  tr:first-child td { border-top: 0; }
-  td:first-child { font-weight: 600; white-space: nowrap; }
-  td:last-child { color: var(--muted); }
-  footer { margin-top: 72px; padding: 28px 0 40px; border-top: 1px solid var(--border); color: var(--faint); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+  .install { max-width: 680px; margin: 0 auto; }
+  ol.first { list-style: none; counter-reset: n; margin: 0; padding: 0; display: grid; gap: 10px; }
+  ol.first li { counter-increment: n; display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; font-size: 15.5px; }
+  ol.first li::before { content: counter(n); flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--raised); display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--muted); margin-top: 1px; }
+  ol.first small { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+  kbd, .k { font: inherit; font-weight: 600; background: var(--raised); border: 1px solid var(--border); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
+  details { margin-top: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 4px 16px; }
+  summary { cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 15px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--muted); font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { margin: 0 0 12px; color: var(--muted); font-size: 14.5px; }
+  .cmd { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 6px 6px 6px 14px; margin: 0 0 14px; }
+  .cmd code { flex: 1; min-width: 0; font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-x: auto; white-space: nowrap; padding: 8px 0; scrollbar-width: none; }
+  .cmd code::-webkit-scrollbar { display: none; }
+  .copy { flex: none; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: 600 13px/1 inherit; padding: 9px 12px; border-radius: 9px; cursor: pointer; }
+  .copy:hover { background: var(--raised); }
+  .copy[data-done="true"] { color: var(--green); border-color: var(--green); }
+
+  .table { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 520px; }
+  th, td { padding: 12px 16px; text-align: left; vertical-align: top; border-top: 1px solid var(--border); }
+  tr:first-child > * { border-top: 0; }
+  th { font-weight: 600; white-space: nowrap; }
+  td { color: var(--muted); }
+  .tag { display: inline-block; font-size: 11.5px; font-weight: 600; color: var(--muted); background: var(--raised); border-radius: 999px; padding: 1px 8px; margin-left: 6px; }
+
+  footer { margin-top: 84px; padding: 28px 0 44px; border-top: 1px solid var(--border); color: var(--faint); font-size: 13.5px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; }
   footer a { color: var(--muted); }
-  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } td:first-child { white-space: normal; } }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } section { padding-top: 56px; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="#"><img src="icon.png" alt=""> Meetiline</a>
-    <a class="link" href="https://iskan.kz">iskan.kz</a>
-  </header>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="icon.png" alt="" width="28" height="28"> Meetiline</a>
+    <nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#install">Install</a>
+      <a href="#privacy">Privacy</a>
+      <a class="pill" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg" data-download>Download</a>
+    </nav>
+  </div>
+</header>
 
+<main id="main">
+<div class="wrap" id="top">
   <div class="hero">
-    <img class="icon" src="icon.png" alt="Meetiline icon">
-    <h1>Get a meeting<br>ready for AI</h1>
+    <img class="icon" src="icon.png" alt="Meetiline app icon" width="124" height="124">
+    <h1>Get a meeting ready for AI</h1>
     <p class="sub">The key screenshots with exact times, and the transcript under each, packed for ChatGPT, Claude or any AI.</p>
-    <a class="button" id="download" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+    <a class="button" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg" data-download>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
       Download for Mac
     </a>
-    <div class="meta">Free · macOS 14 or later · Apple silicon (M1 and newer) · about 6 MB</div>
+    <div class="badges">
+      <span class="badge">Free</span>
+      <span class="badge">macOS 14 or later</span>
+      <span class="badge">Apple silicon (M1 and newer)</span>
+      <span class="badge" id="version">Version 0.1.2 · about 6 MB</span>
+    </div>
+    <p class="hint">First time on a Mac? <a href="#install">Here is how to open it.</a></p>
     <figure class="shot">
       <img src="app.jpg" width="2400" height="1419" alt="Meetiline showing screenshots of a conference talk, their transcript, and the Give to AI panel">
       <figcaption>A 12-minute conference talk (FOSDEM 2024, CC BY 2.0 BE) processed by Meetiline.</figcaption>
     </figure>
   </div>
 
-  <section>
+  <section id="how">
+    <p class="eyebrow">How it works</p>
     <h2>Three steps</h2>
     <div class="steps">
-      <div class="card"><img src="tour-1.png" alt="" loading="lazy"><h3>Drop a recording</h3><p>From Teams, Zoom, Meet or Loom. MP4 or MOV.</p></div>
-      <div class="card"><img src="tour-2.png" alt="" loading="lazy"><h3>Check the result</h3><p>Screenshots with times, and what was said under each.</p></div>
-      <div class="card"><img src="tour-3.png" alt="" loading="lazy"><h3>Give it to your AI</h3><p>One ZIP for a chat, or one instruction for an AI app.</p></div>
+      <div class="card"><div class="art"><img src="tour-1.png" alt="" width="720" height="510" loading="lazy"></div><h3><i>1</i>Drop a recording</h3><p>From Teams, Zoom, Meet or Loom. MP4 or MOV.</p></div>
+      <div class="card"><div class="art"><img src="tour-2.png" alt="" width="720" height="510" loading="lazy"></div><h3><i>2</i>Check the result</h3><p>Screenshots with times, and what was said under each.</p></div>
+      <div class="card"><div class="art">
+        <svg viewBox="0 0 960 680" role="img" aria-label="A package of screenshots and a transcript leaving for a chat"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a42"/><stop offset="1" stop-color="#2a2a30"/></linearGradient></defs>
+          <rect x="130" y="210" width="360" height="300" rx="30" fill="url(#g)" stroke="#4a4a52" stroke-width="3"/>
+          <rect x="130" y="210" width="360" height="74" rx="30" fill="#34343b"/><rect x="190" y="236" width="240" height="22" rx="11" fill="#5a5a63"/>
+          <rect x="170" y="318" width="130" height="92" rx="14" fill="#0a84ff"/><rect x="190" y="340" width="70" height="10" rx="5" fill="#fff" opacity=".85"/><rect x="190" y="360" width="90" height="10" rx="5" fill="#fff" opacity=".55"/>
+          <rect x="320" y="318" width="130" height="92" rx="14" fill="#5ccb94"/><rect x="340" y="340" width="70" height="10" rx="5" fill="#fff" opacity=".85"/><rect x="340" y="360" width="90" height="10" rx="5" fill="#fff" opacity=".55"/>
+          <rect x="170" y="430" width="280" height="12" rx="6" fill="#8e8e93"/><rect x="170" y="454" width="200" height="12" rx="6" fill="#6e6e74"/>
+          <path d="M520 360 H680" stroke="#0a84ff" stroke-width="10" stroke-linecap="round"/><path d="M650 328 L690 360 L650 392" fill="none" stroke="#0a84ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M720 250 h130 a34 34 0 0 1 34 34 v96 a34 34 0 0 1 -34 34 h-70 l-40 40 v-40 h-20 a34 34 0 0 1 -34 -34 v-96 a34 34 0 0 1 34 -34z" fill="#2a2a30" stroke="#0a84ff" stroke-width="6"/>
+          <rect x="745" y="292" width="110" height="12" rx="6" fill="#8e8e93"/><rect x="745" y="320" width="80" height="12" rx="6" fill="#6e6e74"/><rect x="745" y="348" width="95" height="12" rx="6" fill="#6e6e74"/>
+        </svg></div><h3><i>3</i>Give it to your AI</h3><p>One ZIP for a chat, or one instruction for an AI app.</p></div>
     </div>
   </section>
 
-  <section>
-    <h2>Private by design</h2>
+  <section id="install">
+    <p class="eyebrow">Install</p>
+    <h2>Open it the first time</h2>
+    <div class="install">
+      <ol class="first">
+        <li><div>Open the downloaded file and drag <b>Meetiline</b> to <b>Applications</b>.</div></li>
+        <li><div>Open Meetiline. If macOS says it can’t check it for malware, close that message.<small>Meetiline is not yet signed with an Apple Developer ID, so this message is expected, once.</small></div></li>
+        <li><div>Open <b>System Settings</b> › <b>Privacy &amp; Security</b>, scroll down and press <span class="k">Open Anyway</span>.<small>Then enter your Mac password. After that it opens like any other app.</small></div></li>
+        <li><div>Press <b>Download</b> next to <i>Speech model</i> (874 MB, once). Then drop a recording.<small>Screenshots work without it; the transcript needs it. It works offline afterwards.</small></div></li>
+      </ol>
+      <details>
+        <summary>The transcript never starts</summary>
+        <p>Quit Meetiline, paste this into Terminal once, and open the app again:</p>
+        <div class="cmd"><code id="cmd">xattr -dr com.apple.quarantine /Applications/Meetiline.app</code><button class="copy" type="button" data-copy="#cmd" aria-label="Copy the command"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <p class="eyebrow">Privacy</p>
+    <h2>Everything stays on your Mac</h2>
     <div class="facts">
       <div class="fact"><i class="dot"></i><div><b>On your Mac</b><span>Speech is recognized locally. No accounts, no analytics.</span></div></div>
       <div class="fact"><i class="dot"></i><div><b>Nothing is uploaded</b><span>Only the speech model is downloaded, once.</span></div></div>
@@ -108,31 +195,54 @@
     </div>
   </section>
 
-  <section id="open">
-    <h2>Opening it the first time</h2>
-    <ol class="first">
-      <li>Open the downloaded file and drag Meetiline to Applications.</li>
-      <li>Open Meetiline. If macOS says it can’t check it for malware, close that message.</li>
-      <li>System Settings › Privacy &amp; Security › scroll down › <b>&nbsp;Open Anyway</b>.</li>
-    </ol>
-    <p class="note">One time only. Meetiline is not yet signed with an Apple Developer ID.<br>If the transcript never starts, quit Meetiline and run once in Terminal: <code>xattr -dr com.apple.quarantine /Applications/Meetiline.app</code></p>
-    <style>code{background:var(--raised);padding:2px 6px;border-radius:6px;font-size:12.5px}</style>
-  </section>
-
-  <section>
+  <section id="tech">
+    <p class="eyebrow">Under the hood</p>
     <h2>What it is made of</h2>
-    <table>
-      <tr><td>whisper.cpp 1.9.2</td><td>Speech recognition engine inside the app · MIT</td></tr>
-      <tr><td>Whisper large-v3 turbo</td><td>Speech model by OpenAI, downloaded once and checked by SHA-256 · MIT</td></tr>
-      <tr><td>Silero VAD 5.1.2</td><td>Finds where people speak · MIT</td></tr>
-      <tr><td>Apple AVFoundation, Vision, Metal</td><td>Video, text on screenshots, speed · macOS</td></tr>
-    </table>
+    <div class="table" role="region" aria-label="Components" tabindex="0">
+      <table>
+        <tr><th scope="row">whisper.cpp 1.9.2</th><td>Speech recognition engine, inside the app<span class="tag">MIT</span></td></tr>
+        <tr><th scope="row">Whisper large-v3 turbo</th><td>Speech model by OpenAI, downloaded once and checked by SHA-256<span class="tag">MIT</span></td></tr>
+        <tr><th scope="row">Silero VAD 5.1.2</th><td>Finds where people speak<span class="tag">MIT</span></td></tr>
+        <tr><th scope="row">AVFoundation, Vision, Metal</th><td>Video, text on screenshots, speed<span class="tag">macOS</span></td></tr>
+      </table>
+    </div>
   </section>
-
-  <footer>
-    <span>Meetiline 0.1.1 · Made by Iskandar Gubaydullin</span>
-    <span><a href="licences.txt">Open-source licences</a> · <a href="https://iskan.kz">iskan.kz</a></span>
-  </footer>
 </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="foot-version">Meetiline 0.1.2 · Made by Iskandar Gubaydullin</span>
+    <span><a href="licences.txt">Open-source licences</a> · <a href="https://iskan.kz">iskan.kz</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Copy buttons: copy the text of the element named in data-copy and say so.
+  document.querySelectorAll('.copy').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var text = document.querySelector(button.dataset.copy).textContent.trim();
+      var done = function () {
+        var label = button.querySelector('span');
+        button.dataset.done = 'true'; label.textContent = 'Copied';
+        setTimeout(function () { button.dataset.done = 'false'; label.textContent = 'Copy'; }, 1800);
+      };
+      if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(done); return; }
+      var area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select();
+      try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(area);
+    });
+  });
+  // The page shows the real latest version and size.
+  fetch('https://api.github.com/repos/iskanginux/meetiline-site/releases/latest').then(function (r) { return r.ok ? r.json() : null; }).then(function (release) {
+    if (!release) return;
+    var asset = (release.assets || []).filter(function (a) { return a.name === 'Meetiline.dmg'; })[0];
+    var version = (release.tag_name || '').replace(/^v/, '');
+    if (!version) return;
+    document.getElementById('version').textContent = 'Version ' + version + (asset ? ' · ' + (asset.size / 1048576).toFixed(1) + ' MB' : '');
+    document.getElementById('foot-version').textContent = 'Meetiline ' + version + ' · Made by Iskandar Gubaydullin';
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>
