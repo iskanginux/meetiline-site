@@ -25,7 +25,7 @@
     :root { --bg: #f3f3f5; --surface: #ffffff; --raised: #efeff1; --border: #dcdce0; --text: #18181b; --muted: #55555c; --faint: #7d7d84; color-scheme: light; }
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   a { color: inherit; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
@@ -34,10 +34,9 @@
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
   header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; }
-  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
-  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; text-decoration: none; }
-  .brand img { width: 40px; height: 40px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.35)); }
-  nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; }
+    nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
   nav a { color: var(--muted); text-decoration: none; }
   nav a:hover { color: var(--text); }
   nav .pill { color: #fff; background: var(--blue); padding: 7px 14px; border-radius: 999px; font-weight: 600; }
@@ -133,7 +132,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="icon-120.png" alt="" width="40" height="40"> Meetiline</a>
+    <a class="brand" href="#top">Meetiline</a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
