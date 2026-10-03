@@ -67,7 +67,7 @@
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px; }
   .card .art { aspect-ratio: 960 / 680; background: #1f1f23; border-radius: 12px; margin-bottom: 14px; overflow: hidden; display: grid; place-items: center; }
-  .card .art img, .card .art svg { width: 100%; height: 100%; display: block; object-fit: contain; }
+  .card .art img, .card .art svg { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
   .card h3 { margin: 0 0 4px; font-size: 17px; display: flex; gap: 10px; align-items: center; }
   .card h3 i { font-style: normal; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
   .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
@@ -113,7 +113,6 @@
   @media (max-width: 760px) {
     .steps { grid-template-columns: 1fr; }
     section { padding-top: 56px; }
-    .card .art { aspect-ratio: auto; height: 170px; }
     .badge { font-size: 12px; padding: 3px 10px; }
     .hero { padding-top: 32px; }
   }
