@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meetiline · Get a meeting ready for AI</title>
+<meta name="description" content="Meetiline turns a meeting recording into the key screenshots with exact times and a transcript, packed for ChatGPT, Claude or any AI. Runs on your Mac. Nothing is uploaded.">
+<meta property="og:title" content="Meetiline · Get a meeting ready for AI">
+<meta property="og:description" content="Key screenshots with exact times and the transcript under each, packed for any AI. Private, on your Mac.">
+<meta property="og:image" content="https://meetiline-site.vercel.app/app.jpg">
+<meta name="theme-color" content="#181818">
+<link rel="icon" href="favicon.png">
+<style>
+  :root {
+    --bg: #181818; --surface: #1f1f1f; --raised: #282828; --border: #303030;
+    --text: #f2f2f3; --muted: #9a9aa0; --faint: #6e6e74; --blue: #0a84ff; --green: #5ccb94;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #eeeef0; --surface: #ffffff; --raised: #f5f5f6; --border: #dadadd; --text: #18181b; --muted: #5d5d63; --faint: #8a8a90; color-scheme: light; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; }
+  .brand img { width: 30px; height: 30px; border-radius: 7px; }
+  .top a.link { color: var(--muted); text-decoration: none; font-size: 14px; }
+  .hero { text-align: center; padding: 56px 0 40px; }
+  .hero img.icon { width: 128px; height: 128px; filter: drop-shadow(0 18px 30px rgba(0,0,0,.35)); }
+  h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.03em; margin: 22px 0 12px; }
+  .sub { color: var(--muted); font-size: clamp(17px, 2.4vw, 21px); margin: 0 auto 28px; max-width: 560px; }
+  .button { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; font-weight: 600; font-size: 17px; padding: 14px 26px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; }
+  .button:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .meta { color: var(--faint); font-size: 13.5px; margin-top: 14px; }
+  .shot { margin: 28px auto 0; }
+  .shot img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+  .shot figcaption { color: var(--faint); font-size: 12.5px; margin-top: 10px; text-align: center; }
+  section { padding: 64px 0 0; }
+  h2 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 22px; text-align: center; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px; }
+  .card img { width: 100%; height: auto; display: block; border-radius: 12px; margin-bottom: 12px; }
+  .card h3 { margin: 0 0 4px; font-size: 17px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .fact { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
+  .fact b { display: block; font-size: 15.5px; }
+  .fact span { color: var(--muted); font-size: 14px; }
+  .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--green); margin-top: 7px; }
+  ol.first { list-style: none; counter-reset: n; margin: 0 auto; padding: 0; max-width: 640px; display: grid; gap: 10px; }
+  ol.first li { counter-increment: n; display: flex; gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; font-size: 15.5px; }
+  ol.first li::before { content: counter(n); flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--raised); display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--muted); }
+  .note { text-align: center; color: var(--faint); font-size: 13.5px; margin-top: 14px; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; font-size: 14.5px; }
+  td { padding: 11px 16px; border-top: 1px solid var(--border); vertical-align: top; }
+  tr:first-child td { border-top: 0; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  td:last-child { color: var(--muted); }
+  footer { margin-top: 72px; padding: 28px 0 40px; border-top: 1px solid var(--border); color: var(--faint); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  footer a { color: var(--muted); }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } td:first-child { white-space: normal; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#"><img src="icon.png" alt=""> Meetiline</a>
+    <a class="link" href="https://iskan.kz">iskan.kz</a>
+  </header>
+
+  <div class="hero">
+    <img class="icon" src="icon.png" alt="Meetiline icon">
+    <h1>Get a meeting<br>ready for AI</h1>
+    <p class="sub">The key screenshots with exact times, and the transcript under each, packed for ChatGPT, Claude or any AI.</p>
+    <a class="button" id="download" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+      Download for Mac
+    </a>
+    <div class="meta">Free · macOS 14 or later · Apple silicon (M1 and newer) · about 6 MB</div>
+    <figure class="shot">
+      <img src="app.jpg" width="2400" height="1419" alt="Meetiline showing screenshots of a conference talk, their transcript, and the Give to AI panel">
+      <figcaption>A 12-minute conference talk (FOSDEM 2024, CC BY 2.0 BE) processed by Meetiline.</figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <h2>Three steps</h2>
+    <div class="steps">
+      <div class="card"><img src="tour-1.png" alt="" loading="lazy"><h3>Drop a recording</h3><p>From Teams, Zoom, Meet or Loom. MP4 or MOV.</p></div>
+      <div class="card"><img src="tour-2.png" alt="" loading="lazy"><h3>Check the result</h3><p>Screenshots with times, and what was said under each.</p></div>
+      <div class="card"><img src="tour-3.png" alt="" loading="lazy"><h3>Give it to your AI</h3><p>One ZIP for a chat, or one instruction for an AI app.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Private by design</h2>
+    <div class="facts">
+      <div class="fact"><i class="dot"></i><div><b>On your Mac</b><span>Speech is recognized locally. No accounts, no analytics.</span></div></div>
+      <div class="fact"><i class="dot"></i><div><b>Nothing is uploaded</b><span>Only the speech model is downloaded, once.</span></div></div>
+      <div class="fact"><i class="dot"></i><div><b>Your recording is untouched</b><span>Projects are plain folders you can open.</span></div></div>
+      <div class="fact"><i class="dot"></i><div><b>Russian and English</b><span>Whisper large-v3 turbo, built into the app.</span></div></div>
+    </div>
+  </section>
+
+  <section id="open">
+    <h2>Opening it the first time</h2>
+    <ol class="first">
+      <li>Open the downloaded file and drag Meetiline to Applications.</li>
+      <li>Open Meetiline. If macOS says it can’t check it for malware, close that message.</li>
+      <li>System Settings › Privacy &amp; Security › scroll down › <b>&nbsp;Open Anyway</b>.</li>
+    </ol>
+    <p class="note">One time only. Meetiline is not yet signed with an Apple Developer ID.</p>
+  </section>
+
+  <section>
+    <h2>What it is made of</h2>
+    <table>
+      <tr><td>whisper.cpp 1.9.2</td><td>Speech recognition engine inside the app · MIT</td></tr>
+      <tr><td>Whisper large-v3 turbo</td><td>Speech model by OpenAI, downloaded once and checked by SHA-256 · MIT</td></tr>
+      <tr><td>Silero VAD 5.1.2</td><td>Finds where people speak · MIT</td></tr>
+      <tr><td>Apple AVFoundation, Vision, Metal</td><td>Video, text on screenshots, speed · macOS</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    <span>Meetiline 0.1 · Made by Iskandar Gubaydullin</span>
+    <span><a href="https://iskan.kz">iskan.kz</a></span>
+  </footer>
+</div>
+</body>
+</html>
