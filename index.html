@@ -94,6 +94,8 @@
   .copy:hover { background: var(--raised); }
   .copy[data-done="true"] { color: var(--green); border-color: var(--green); }
 
+  .band { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px 24px; background-image: radial-gradient(closest-side at 50% 0%, rgba(10,132,255,.16), transparent); }
+  .band h2 { margin-bottom: 20px; }
   .table { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
   table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 520px; }
   th, td { padding: 12px 16px; text-align: left; vertical-align: top; border-top: 1px solid var(--border); }
@@ -105,9 +107,16 @@
   footer { margin-top: 84px; padding: 28px 0 44px; border-top: 1px solid var(--border); color: var(--faint); font-size: 13.5px; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; }
   footer a { color: var(--muted); }
-  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } section { padding-top: 56px; } }
+  @media (max-width: 760px) {
+    .steps { grid-template-columns: 1fr; }
+    section { padding-top: 56px; }
+    .card .art { aspect-ratio: auto; height: 170px; }
+    .badge { font-size: 12px; padding: 3px 10px; }
+    .hero { padding-top: 32px; }
+  }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Meetiline","applicationCategory":"BusinessApplication","operatingSystem":"macOS 14+","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Iskandar Gubaydullin","url":"https://iskan.kz"},"description":"Turns a meeting recording into key screenshots with exact times and a transcript, packed for any AI."}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -141,7 +150,7 @@
     </div>
     <p class="hint">First time on a Mac? <a href="#install">Here is how to open it.</a></p>
     <figure class="shot">
-      <img src="app.jpg" width="2400" height="1419" alt="Meetiline showing screenshots of a conference talk, their transcript, and the Give to AI panel">
+      <a href="app.jpg" target="_blank" rel="noopener" aria-label="Open the screenshot full size"><img src="app.jpg" width="2400" height="1419" alt="Meetiline showing screenshots of a conference talk, their transcript, and the Give to AI panel"></a>
       <figcaption>A 12-minute conference talk (FOSDEM 2024, CC BY 2.0 BE) processed by Meetiline.</figcaption>
     </figure>
   </div>
@@ -173,7 +182,7 @@
       <ol class="first">
         <li><div>Open the downloaded file and drag <b>Meetiline</b> to <b>Applications</b>.</div></li>
         <li><div>Open Meetiline. If macOS says it can’t check it for malware, close that message.<small>Meetiline is not yet signed with an Apple Developer ID, so this message is expected, once.</small></div></li>
-        <li><div>Open <b>System Settings</b> › <b>Privacy &amp; Security</b>, scroll down and press <span class="k">Open Anyway</span>.<small>Then enter your Mac password. After that it opens like any other app.</small></div></li>
+        <li><div>Open <b>System Settings</b> › <b>Privacy &amp; Security</b>, scroll down and <span style="white-space:nowrap">press <span class="k">Open Anyway</span>.</span><small>Then enter your Mac password. After that it opens like any other app.</small></div></li>
         <li><div>Press <b>Download</b> next to <i>Speech model</i> (874 MB, once). Then drop a recording.<small>Screenshots work without it; the transcript needs it. It works offline afterwards.</small></div></li>
       </ol>
       <details>
@@ -190,8 +199,19 @@
     <div class="facts">
       <div class="fact"><i class="dot"></i><div><b>On your Mac</b><span>Speech is recognized locally. No accounts, no analytics.</span></div></div>
       <div class="fact"><i class="dot"></i><div><b>Nothing is uploaded</b><span>Only the speech model is downloaded, once.</span></div></div>
-      <div class="fact"><i class="dot"></i><div><b>Your recording is untouched</b><span>Projects are plain folders you can open.</span></div></div>
+      <div class="fact"><i class="dot"></i><div><b>Recording untouched</b><span>Projects are plain folders you can open.</span></div></div>
       <div class="fact"><i class="dot"></i><div><b>Russian and English</b><span>Whisper large-v3 turbo, built into the app.</span></div></div>
+    </div>
+  </section>
+
+  <section class="closing" aria-label="Download">
+    <div class="band">
+      <h2>Ready when your next meeting ends</h2>
+      <a class="button" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg" data-download>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+        Download for Mac
+      </a>
+      <p class="hint">Free · macOS 14 or later · Apple silicon</p>
     </div>
   </section>
 
