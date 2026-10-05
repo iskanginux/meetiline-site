@@ -57,25 +57,27 @@
   .hint { color: var(--faint); font-size: 13px; margin-top: 8px; }
   .hint a { color: var(--muted); }
   .tour { margin: 24px auto 0; }
-  .tour-frame { position: relative; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: #181818; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); cursor: pointer; touch-action: pan-y; }
+  /* The picture is as large as fits with the text and the buttons under it in one screen: its width follows the window's height. */
+  .tour-frame { position: relative; width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 0 auto; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: #181818; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); cursor: pointer; touch-action: pan-y; }
   .tour-frame img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .6s ease; -webkit-user-drag: none; user-select: none; }
   .tour-frame img.on { opacity: 1; }
-  .tour-arrow { position: absolute; top: 50%; width: 40px; height: 56px; margin-top: -28px; padding: 0; border: 0; border-radius: 10px; background: rgba(24,24,24,.72); color: #f2f2f3; cursor: pointer; display: grid; place-items: center; opacity: 0; transition: opacity .2s ease, background .2s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .tour-arrow { position: absolute; top: 50%; width: 34px; height: 48px; margin-top: -24px; padding: 0; border: 0; border-radius: 10px; background: rgba(24,24,24,.72); color: #f2f2f3; cursor: pointer; display: grid; place-items: center; opacity: 0; transition: opacity .2s ease, background .2s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
   .tour-arrow:hover { background: rgba(24,24,24,.9); }
-  .tour-arrow.prev { left: 12px; } .tour-arrow.next { right: 12px; }
+  .tour-arrow.prev { left: 8px; } .tour-arrow.next { right: 8px; }
   .tour-frame:hover .tour-arrow, .tour-arrow:focus-visible { opacity: 1; }
   @media (hover: none) { .tour-arrow { opacity: .85; width: 34px; height: 48px; margin-top: -24px; } }
-  .tour-text { text-align: center; margin: 20px auto 0; min-height: 48px; max-width: 560px; }
-  .tour-text span { display: block; color: var(--text); font-size: 16px; }
+  .tour-text { text-align: center; margin: 14px auto 0; min-height: 24px; max-width: 560px; }
+  .tour-text span { display: block; color: var(--text); font-size: 15.5px; line-height: 1.45; }
+  @media (max-width: 640px) { .tour-text { min-height: 45px; } }
   .tour-text > div { transition: opacity .3s ease; }
-  .tour-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tour-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
   .tour-tabs button { position: relative; overflow: hidden; padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 13.5px; cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
   .tour-tabs button:hover { color: var(--text); }
   .tour-tabs button[aria-selected="true"] { color: var(--text); background: var(--raised); border-color: color-mix(in srgb, var(--muted) 40%, var(--border)); }
   .tour-tabs button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--muted); }
   .tour.run .tour-tabs button[aria-selected="true"]::after { animation: fill var(--dwell, 3s) linear forwards; }
   @keyframes fill { from { width: 0; } to { width: 100%; } }
-  .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 16px; text-align: center; }
+  .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 14px; text-align: center; }
 
   section { padding: 76px 0 0; }
   .eyebrow { text-align: center; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
