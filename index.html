@@ -101,6 +101,13 @@
   .tour.run .tour-tabs button[aria-selected="true"]::after { animation: fill var(--dwell, 3s) linear forwards; }
   @keyframes fill { from { width: 0; } to { width: 100%; } }
   .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 14px; text-align: center; }
+  /* Two numbers under the tour: how fast, which languages. Big figure, one short line each; not a section of its own. */
+  .stats { display: flex; justify-content: center; margin: 30px auto 0; max-width: 640px; }
+  .stat { flex: 1; text-align: center; padding: 4px 20px; }
+  .stat + .stat { border-left: 1px solid var(--border); }
+  .stat b { display: block; font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; }
+  .stat span { display: block; color: var(--muted); font-size: 13.5px; line-height: 1.4; margin-top: 4px; }
+  @media (max-width: 520px) { .stats { flex-direction: column; gap: 16px; } .stat + .stat { border-left: 0; border-top: 1px solid var(--border); padding-top: 16px; } }
 
   section { padding: 60px 0 0; }
   .eyebrow { text-align: center; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
@@ -224,6 +231,10 @@
       </div>
       <figcaption class="note">Sample: <a href="https://youtu.be/3YHPgdA8q4c" target="_blank" rel="noopener">Drupal Usability Meeting, 2 October 2026</a> by Benji Fisher (CC BY), processed by Meetiline.</figcaption>
     </figure>
+    <div class="stats">
+      <div class="stat"><b>~2 min</b><span>for a one-hour meeting, all on your Mac<br>(tested on an M4 Pro)</span></div>
+      <div class="stat"><b>English · Russian</b><span>what is said, and the text on screen</span></div>
+    </div>
   </div>
 
   <section id="how">
@@ -268,7 +279,7 @@
       <div class="fact"><i class="dot"></i><div><b>On your Mac</b><span>Speech is recognized locally. No accounts, no analytics.</span></div></div>
       <div class="fact"><i class="dot"></i><div><b>Nothing is uploaded</b><span>Only the speech model is downloaded, once.</span></div></div>
       <div class="fact"><i class="dot"></i><div><b>Recording untouched</b><span>Projects are plain folders you can open.</span></div></div>
-      <div class="fact"><i class="dot"></i><div><b>Russian and English</b><span>Whisper large-v3 turbo, built into the app.</span></div></div>
+      <div class="fact"><i class="dot"></i><div><b>Works offline</b><span>After that one download, no internet is needed.</span></div></div>
     </div>
   </section>
 
