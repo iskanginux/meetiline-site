@@ -211,13 +211,13 @@
 
   .band { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px 24px; background-image: radial-gradient(closest-side at 50% 0%, rgba(10,132,255,.16), transparent); }
   .band h2 { margin-bottom: 20px; }
-  /* Either side of the last call: the robot buried under a raw recording, and the same robot with everything sorted. */
-  .band { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
-  .band-body { grid-column: 2; }
-  .band-robot { width: 100%; max-width: 210px; height: auto; justify-self: center; }
-  .band-robot.left { grid-column: 1; }
-  .band-robot.right { grid-column: 3; max-width: 190px; }
-  @media (max-width: 860px) { .band { display: block; } .band-robot { display: none; } }
+  /* Either side of the last call: the robot buried under a recording, and the same robot with everything sorted. They stand on
+     the bottom edge of the band, larger than it, so they reach out over its top and sides. */
+  .band { position: relative; overflow: visible; padding-top: 26px; padding-bottom: 26px; }
+  .band-robot { position: absolute; bottom: 0; height: auto; pointer-events: none; }
+  .band-robot.left { left: -150px; width: clamp(240px, 19.5vw, 280px); }
+  .band-robot.right { right: -150px; width: clamp(310px, 25.5vw, 380px); }
+  @media (max-width: 1280px) { .band-robot { display: none; } }
   .app { margin: 0; flex: none; width: 78px; padding: 8px 4px 7px; text-align: center; line-height: 1; background: var(--raised); border: 1px solid var(--border); border-radius: 18px; }
   .app figcaption { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--text); }
   .term-icon { display: block; margin: 0 auto; width: 56px; height: 56px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
