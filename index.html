@@ -150,6 +150,15 @@
   .tip-box::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 12px; }
   .tip:hover .tip-box, .tip:focus-within .tip-box { display: block; }
   .tip:focus-visible { border-bottom-color: var(--blue); }
+  /* The install script, shown in place: open it to read every line before running it. */
+  .script { margin-top: 10px; font-size: 12.5px; background: none; border: 0; border-radius: 0; padding: 0; }
+  .script summary { cursor: pointer; color: var(--muted); list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 0; font-weight: 400; font-size: 12.5px; justify-content: flex-start; }
+  .script summary::after, .script[open] summary::after { content: none; }
+  .script summary::-webkit-details-marker { display: none; }
+  .script summary::before { content: "›"; display: inline-block; transition: transform .15s ease; }
+  .script[open] summary::before { transform: rotate(90deg); }
+  .script pre { margin: 8px 0 0; max-height: 260px; overflow: auto; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; }
+  .script pre code { font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); white-space: pre; }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
@@ -287,7 +296,8 @@
         <h3>One line in Terminal</h3>
         <p>Installs it in Applications and opens it. No warning.</p>
         <div class="cmd"><code id="cmd">curl -fsSL https://meetiline.iskan.kz/install | sh</code><button class="copy" type="button" data-copy="#cmd" aria-label="Copy the line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div>
-        <p class="why">Open Terminal (<span class="k">⌘ Space</span>, type Terminal), paste, press <span class="k">Return</span>. <a href="install.sh" target="_blank" rel="noopener">See what it does</a>. With Homebrew: <code class="inline">brew install --cask iskanginux/tap/meetiline</code></p>
+        <p class="why">Open Terminal (<span class="k">⌘ Space</span>, type Terminal), paste, press <span class="k">Return</span>. With Homebrew: <code class="inline">brew install --cask iskanginux/tap/meetiline</code></p>
+        <details class="script" data-src="install.sh"><summary>See what it does</summary><pre><code>Loading…</code></pre></details>
       </div>
     </div>
     <p class="then">Then, in Meetiline, press <b>Download</b> next to <span class="tip" tabindex="0" aria-describedby="tip-model"><i>Speech model</i> (874 MB, once)<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-model"><b>Whisper large-v3 turbo</b> is an open speech-recognition model made by OpenAI (MIT licence), not part of Meetiline. The app downloads it once from <a href="https://huggingface.co/ggerganov/whisper.cpp" target="_blank" rel="noopener">Hugging Face</a> and runs it on your Mac with <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>, offline. <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">About Whisper</a></span></span> and drop a recording. If the transcript doesn’t start after installing from the download, the Terminal line fixes that too.</p>
@@ -410,6 +420,16 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; schedule(); }, { threshold: 0.4 }).observe(tour);
     else { visible = true; schedule(); }
   })();
+  // "See what it does": the install script itself, read from the site and shown in place the first time it is opened.
+  document.querySelectorAll('details.script').forEach(function (box) {
+    box.addEventListener('toggle', function () {
+      if (!box.open || box.dataset.loaded) return;
+      box.dataset.loaded = '1';
+      fetch(box.dataset.src).then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+        .then(function (text) { box.querySelector('code').textContent = text; })
+        .catch(function () { box.querySelector('code').textContent = 'Could not load it. It is at https://meetiline.iskan.kz/install.sh'; });
+    });
+  });
   // Copy buttons: copy the text of the element named in data-copy and say so.
   document.querySelectorAll('.copy').forEach(function (button) {
     button.addEventListener('click', function () {
