@@ -68,6 +68,8 @@
   .hint { color: var(--faint); font-size: 13px; margin-top: 8px; }
   .hero .hint { margin: 12px 0 0; }
   .hint a { color: var(--muted); }
+  .hint a.down { text-decoration: none; border-bottom: 1px dotted currentColor; display: inline-flex; align-items: center; gap: 4px; }
+  .hint a.down:hover { color: var(--text); }
   .tour { margin: 24px auto 0; }
   /* The picture is as large as fits with the text and the buttons under it in one screen: its width follows the window's height. */
   .tour-frame { position: relative; width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 0 auto; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: var(--shot); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: pointer; touch-action: pan-y; }
@@ -231,7 +233,7 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
       Download for Mac
     </a>
-    <p class="hint">First time on a Mac? <a href="#install">Here is how to open it.</a></p>
+    <p class="hint">First time on a Mac? <a class="down" href="#install">Here is how to install it<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg></a></p>
     <div class="badges">
       <span class="badge">Free</span>
       <span class="badge">macOS 14 or later</span>
