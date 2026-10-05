@@ -141,7 +141,6 @@
   .way ol { margin: 0 0 10px; padding-left: 20px; font-size: 14.5px; display: grid; gap: 6px; }
   .way .why { font-size: 12.5px; color: var(--faint); margin: 0; line-height: 1.6; }
   .way .why a { color: var(--muted); }
-  .way .cmd code { white-space: normal; overflow-wrap: break-word; }
   .button.small { font-size: 14px; padding: 8px 16px; gap: 7px; margin: 2px 0 14px; box-shadow: none; }
   /* A word with more to say: dotted underline and a small "i"; the note opens on hover or focus and its links can be clicked. */
   .tip { position: relative; cursor: help; outline: none; white-space: nowrap; text-decoration: underline dotted color-mix(in srgb, currentColor 40%, transparent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
@@ -172,6 +171,13 @@
   .sheet-close:hover { color: var(--text); }
   dialog.sheet pre { margin: 0; padding: 14px 18px; overflow: auto; }
   dialog.sheet code { font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); white-space: pre; }
+  /* The install line on exactly two lines, and a copy button that is only an icon (a check mark once copied). */
+  .cmd.two code { font-size: 11.5px; line-height: 1.6; white-space: nowrap; overflow-x: auto; }
+  .cmd.two code span { display: block; }
+  .copy.icon { min-width: 0; width: 34px; height: 34px; padding: 0; }
+  .copy.icon .i-done { display: none; }
+  .copy.icon[data-done="true"] .i-copy { display: none; }
+  .copy.icon[data-done="true"] .i-done { display: block; }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
@@ -308,7 +314,7 @@
       <div class="way">
         <h3>One line in Terminal</h3>
         <p>Installs it in Applications and opens it. No warning.</p>
-        <div class="cmd"><code id="cmd">curl -fsSL https://meetiline.iskan.kz/install | sh</code><button class="copy" type="button" data-copy="#cmd" aria-label="Copy the line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div>
+        <div class="cmd two"><code id="cmd"><span>curl -fsSL https://meetiline.iskan.kz/install</span> <span class="l2">| sh</span></code><button class="copy icon" type="button" data-copy="#cmd" aria-label="Copy the line" title="Copy"><svg class="i-copy" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><svg class="i-done" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div>
         <p class="why">Open Terminal (<span class="k">⌘ Space</span>, type Terminal), paste, press <span class="k">Return</span>. With Homebrew: <code class="inline">brew install --cask iskanginux/tap/meetiline</code></p>
         <details class="script"><summary>See what it does</summary>
           <ol>
@@ -470,8 +476,8 @@
       var text = document.querySelector(button.dataset.copy).textContent.trim();
       var done = function () {
         var label = button.querySelector('span');
-        button.dataset.done = 'true'; label.textContent = 'Copied';
-        setTimeout(function () { button.dataset.done = 'false'; label.textContent = 'Copy'; }, 1800);
+        button.dataset.done = 'true'; if (label) label.textContent = 'Copied'; button.setAttribute('aria-label', 'Copied');
+        setTimeout(function () { button.dataset.done = 'false'; if (label) label.textContent = 'Copy'; button.setAttribute('aria-label', 'Copy the line'); }, 1800);
       };
       if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(done); return; }
       var area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select();
