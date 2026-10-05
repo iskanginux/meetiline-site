@@ -211,13 +211,24 @@
 
   .band { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px 24px; background-image: radial-gradient(closest-side at 50% 0%, rgba(10,132,255,.16), transparent); }
   .band h2 { margin-bottom: 20px; }
-  /* Either side of the last call: the robot buried under a recording, and the same robot with everything sorted. They stand on
-     the bottom edge of the band, larger than it, so they reach out over its top and sides. */
-  .band { position: relative; overflow: visible; padding-top: 26px; padding-bottom: 26px; }
-  .band-robot { position: absolute; bottom: 0; height: auto; pointer-events: none; }
-  .band-robot.left { left: -150px; width: clamp(240px, 19.5vw, 280px); }
-  .band-robot.right { right: -150px; width: clamp(310px, 25.5vw, 380px); }
-  @media (max-width: 1280px) { .band-robot { display: none; } }
+  /* Either side of the last call: the robot buried under a raw recording, and the same robot with everything sorted.
+     Both stand on the band's bottom edge at the same scale (--lh is the left picture's height; the right one is drawn
+     closer, so it is shown at 0.56 of it). Only their tops rise over the band. The text keeps clear of them with side
+     padding; on phones they move under the text instead, side by side. */
+  .band { --lh: 222px; --side: calc(var(--lh) * 1.19 + 12px); position: relative; overflow: visible; padding: 26px var(--side); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .band h2 { font-size: 26px; text-wrap: balance; }
+  .band-robot { position: absolute; bottom: 0; width: auto; pointer-events: none; user-select: none; }
+  .band-robot.left { left: 4px; height: var(--lh); }
+  .band-robot.right { right: 16px; height: calc(var(--lh) * 0.56); }
+  @media (max-width: 1060px) { .band { --lh: 200px; padding-top: 20px; padding-bottom: 20px; } .band h2 { font-size: 22px; } }
+  /* Phones and small tablets: the text first, the two robots under it, side by side, with room kept for them. */
+  @media (max-width: 860px) {
+    .band { --lh: 150px; padding: 30px 18px calc(var(--lh) + 12px); }
+    .band h2 { font-size: 24px; }
+    .band-robot.left { left: 8px; }
+    .band-robot.right { right: 12px; }
+  }
+  @media (max-width: 380px) { .band { --lh: 122px; } }
   .app { margin: 0; flex: none; width: 78px; padding: 8px 4px 7px; text-align: center; line-height: 1; background: var(--raised); border: 1px solid var(--border); border-radius: 18px; }
   .app figcaption { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--text); }
   .term-icon { display: block; margin: 0 auto; width: 56px; height: 56px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
@@ -375,7 +386,7 @@
 
   <section class="closing" aria-label="Download">
     <div class="band">
-      <img class="band-robot left" src="robot-overwhelmed.png" width="600" height="640" alt="" loading="lazy">
+      <img class="band-robot left" src="robot-left.png" width="685" height="575" alt="" loading="lazy">
       <div class="band-body">
       <h2>Ready when your next meeting ends</h2>
       <a class="button" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg" data-download>
@@ -384,7 +395,7 @@
       </a>
       <p class="hint">Free · macOS 14 or later · Apple silicon</p>
       </div>
-      <img class="band-robot right" src="robot-happy.png" width="576" height="414" alt="" loading="lazy">
+      <img class="band-robot right" src="robot-right.png" width="505" height="462" alt="" loading="lazy">
     </div>
   </section>
 
