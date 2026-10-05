@@ -100,7 +100,8 @@
   .tour-tabs button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--muted); }
   .tour.run .tour-tabs button[aria-selected="true"]::after { animation: fill var(--dwell, 3s) linear forwards; }
   @keyframes fill { from { width: 0; } to { width: 100%; } }
-  .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 12px; text-align: center; }
+  .tour .note { color: var(--faint); font-size: 10.5px; line-height: 1.4; opacity: .8; margin-top: 8px; text-align: center; }
+  .tour .note a { color: inherit; }
   /* Two numbers under the tour: how fast, which languages. Big figure, one short line each; not a section of its own. */
   .stats { display: flex; justify-content: center; margin: 30px auto 0; max-width: 640px; }
   .stat { flex: 1; text-align: center; padding: 4px 20px; }
