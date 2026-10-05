@@ -213,23 +213,27 @@
   .band h2 { margin-bottom: 20px; }
   /* Either side of the last call: the robot buried under a raw recording, and the same robot with everything sorted.
      Both stand on the band's bottom edge at the same scale (--lh is the left picture's height; the right one is drawn
-     closer, so it is shown at 0.56 of it). Only their tops rise over the band. The text keeps clear of them with side
+     closer, so it is shown at 0.62 of it). Only their tops rise over the band. The text keeps clear of them with side
      padding; on phones they move under the text instead, side by side. */
   .band { --lh: 222px; --side: calc(var(--lh) * 1.19 + 12px); position: relative; overflow: visible; padding: 26px var(--side); display: flex; flex-direction: column; justify-content: center; align-items: center; }
   .band h2 { font-size: 26px; text-wrap: balance; }
   .band-robot { position: absolute; bottom: 0; width: auto; pointer-events: none; user-select: none; }
   .band-robot.left { left: -18px; height: var(--lh); }
   /* Anchored at its bottom right corner, so it grows up and to the left. */
-  .band-robot.right { right: -10px; bottom: -8px; height: calc(var(--lh) * 0.56 + 14px); }
+  .band-robot.right { right: -10px; bottom: -8px; height: calc(var(--lh) * 0.623); }
   @media (max-width: 1060px) { .band { --lh: 200px; padding-top: 20px; padding-bottom: 20px; } .band h2 { font-size: 22px; } }
-  /* Phones and small tablets: the text first, the two robots under it, side by side, with room kept for them. */
-  @media (max-width: 860px) {
-    .band { --lh: 150px; padding: 30px 18px calc(var(--lh) + 12px); }
-    .band h2 { font-size: 24px; }
-    .band-robot.left { left: 8px; }
-    .band-robot.right { right: 12px; bottom: 0; height: calc(var(--lh) * 0.56); }
+  /* Tablets: the same side-by-side layout, smaller, the headline on two lines. */
+  @media (max-width: 860px) { .band { --lh: 150px; padding-top: 16px; padding-bottom: 16px; } .band h2 { font-size: 20px; margin-bottom: 12px; } .band .hint { margin-top: 6px; } }
+  /* Phones: the text first, the two robots under it, side by side, small, with just enough room kept for them. */
+  @media (max-width: 680px) {
+    .band { --lh: 112px; padding: 20px 18px calc(var(--lh) + 6px); }
+    .band h2 { font-size: 21px; margin-bottom: 12px; }
+    .band .hint { margin-top: 6px; }
+    .band-robot.left { left: 10px; }
+    .band-robot.right { right: 12px; bottom: 0; }
   }
-  @media (max-width: 380px) { .band { --lh: 122px; } }
+  @media (max-width: 360px) { .band { --lh: 100px; } }
+  .band .button { white-space: nowrap; }
   .app { margin: 0; flex: none; width: 78px; padding: 8px 4px 7px; text-align: center; line-height: 1; background: var(--raised); border: 1px solid var(--border); border-radius: 18px; }
   .app figcaption { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--text); }
   .term-icon { display: block; margin: 0 auto; width: 56px; height: 56px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
