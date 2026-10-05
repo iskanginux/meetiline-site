@@ -130,7 +130,8 @@
   .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
   .fact { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
   .fact b { display: block; font-size: 15.5px; line-height: 1.35; }
-  .fact span { color: var(--muted); font-size: 14px; line-height: 1.4; }
+  /* A block of its own, so its own line height counts (inline, the body's 1.55 would win). */
+  .fact div > span { display: block; margin-top: 2px; color: var(--muted); font-size: 14px; line-height: 1.4; }
   /* Each privacy fact has its own monochrome icon, like the last install step. */
   .fact-i { flex: none; width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; color: var(--text); background: var(--raised); border: 1px solid var(--border); }
   .fact .fact-i { color: var(--text); font-size: inherit; }
