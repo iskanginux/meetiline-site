@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Meetiline · Get a meeting ready for AI">
 <meta property="og:description" content="Key screenshots with exact times and the transcript under each, packed for any AI. Private, on your Mac.">
-<meta property="og:image" content="https://meetiline.iskan.kz/slides/2-results.jpg">
+<meta property="og:image" content="https://meetiline.iskan.kz/slides/1-results.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#181818">
 <link rel="icon" href="favicon.png">
@@ -57,21 +57,24 @@
   .hint { color: var(--faint); font-size: 13.5px; margin-top: 12px; }
   .hint a { color: var(--muted); }
   .tour { margin: 44px auto 0; }
-  .tour-frame { position: relative; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: #181818; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); }
-  .tour-frame img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .7s ease; }
+  .tour-frame { position: relative; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: #181818; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); cursor: pointer; touch-action: pan-y; }
+  .tour-frame img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .6s ease; -webkit-user-drag: none; user-select: none; }
   .tour-frame img.on { opacity: 1; }
-  .tour-text { text-align: center; margin: 22px auto 0; min-height: 66px; max-width: 560px; }
-  .tour-text b { display: block; font-size: 17px; letter-spacing: -0.01em; }
-  .tour-text span { display: block; color: var(--muted); font-size: 14.5px; margin-top: 4px; }
-  .tour-text > div { transition: opacity .35s ease; }
-  .tour-tabs { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
-  .tour-tabs button { position: relative; width: 34px; height: 24px; padding: 0; border: 0; background: transparent; cursor: pointer; border-radius: 8px; }
-  .tour-tabs button::before { content: ""; position: absolute; left: 4px; right: 4px; top: 11px; height: 3px; border-radius: 3px; background: var(--border); transition: background .3s ease; }
-  .tour-tabs button::after { content: ""; position: absolute; left: 4px; top: 11px; height: 3px; width: 0; border-radius: 3px; background: var(--muted); }
-  .tour-tabs button[aria-selected="true"]::before { background: color-mix(in srgb, var(--muted) 45%, var(--border)); }
-  .tour-tabs button[aria-selected="true"]::after { width: calc(100% - 8px); }
-  .tour.run .tour-tabs button[aria-selected="true"]::after { animation: fill var(--dwell, 6s) linear; }
-  @keyframes fill { from { width: 0; } to { width: calc(100% - 8px); } }
+  .tour-arrow { position: absolute; top: 50%; width: 40px; height: 56px; margin-top: -28px; padding: 0; border: 0; border-radius: 10px; background: rgba(24,24,24,.72); color: #f2f2f3; cursor: pointer; display: grid; place-items: center; opacity: 0; transition: opacity .2s ease, background .2s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .tour-arrow:hover { background: rgba(24,24,24,.9); }
+  .tour-arrow.prev { left: 12px; } .tour-arrow.next { right: 12px; }
+  .tour-frame:hover .tour-arrow, .tour-arrow:focus-visible { opacity: 1; }
+  @media (hover: none) { .tour-arrow { opacity: .85; width: 34px; height: 48px; margin-top: -24px; } }
+  .tour-text { text-align: center; margin: 20px auto 0; min-height: 48px; max-width: 560px; }
+  .tour-text span { display: block; color: var(--text); font-size: 16px; }
+  .tour-text > div { transition: opacity .3s ease; }
+  .tour-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tour-tabs button { position: relative; overflow: hidden; padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 13.5px; cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+  .tour-tabs button:hover { color: var(--text); }
+  .tour-tabs button[aria-selected="true"] { color: var(--text); background: var(--raised); border-color: color-mix(in srgb, var(--muted) 40%, var(--border)); }
+  .tour-tabs button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--muted); }
+  .tour.run .tour-tabs button[aria-selected="true"]::after { animation: fill var(--dwell, 3s) linear forwards; }
+  @keyframes fill { from { width: 0; } to { width: 100%; } }
   .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 16px; text-align: center; }
 
   section { padding: 76px 0 0; }
@@ -143,7 +146,7 @@
     .badge { font-size: 12px; padding: 3px 10px; }
     .hero { padding-top: 32px; }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } .tour-frame img, .tour-text > div { transition: none; } .tour-tabs button::after { animation: none !important; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } .tour-frame img, .tour-text > div, .tour-arrow { transition: none; } .tour-tabs button::after { animation: none !important; } }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Meetiline","applicationCategory":"BusinessApplication","operatingSystem":"macOS 14+","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Iskandar Gubaydullin","url":"https://iskan.kz"},"description":"Turns a meeting recording into key screenshots with exact times and a transcript, packed for any AI."}</script>
 </head>
@@ -180,19 +183,17 @@
     <p class="hint">First time on a Mac? <a href="#install">Here is how to open it.</a></p>
     <figure class="tour" id="tour" aria-roledescription="carousel" aria-label="Meetiline, step by step">
       <div class="tour-frame">
-          <img class="on" src="slides/1-library.jpg" width="2400" height="1376" alt="The Meetiline start screen: a drop zone for a recording and the list of projects">
-          <img src="slides/2-results.jpg" width="2400" height="1376" alt="Screenshots of a conference talk, the video and the transcript under each screenshot, and the Give to AI panel" loading="lazy">
-          <img src="slides/3-moment.jpg" width="2400" height="1376" alt="A screenshot picked in the list, the video at that moment and the words said around it" loading="lazy">
-          <img src="slides/4-words.jpg" width="2400" height="1376" alt="The Check Words window listing doubtful words with suggestions" loading="lazy">
-          <img src="slides/5-details.jpg" width="2400" height="1376" alt="The project window with the details panel open" loading="lazy">
+          <img class="on" src="slides/1-results.jpg" width="2400" height="1376" alt="Screenshots of a conference talk, the video and the transcript under each screenshot, and the Give to AI panel">
+          <img src="slides/2-moment.jpg" width="2400" height="1376" alt="A screenshot picked in the list, the video at that moment and the words said around it" loading="lazy">
+          <img src="slides/3-words.jpg" width="2400" height="1376" alt="The Check Words window listing doubtful words with suggestions" loading="lazy">
+        <button class="tour-arrow prev" type="button" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="tour-arrow next" type="button" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
-      <div class="tour-text" aria-live="polite"><div><b>Drop a recording</b><span>From Teams, Zoom, Meet or Loom. It stays on your Mac.</span></div></div>
+      <div class="tour-text" aria-live="polite"><div><span>Every real change on screen gets a picture, its time and what was said.</span></div></div>
       <div class="tour-tabs" role="tablist" aria-label="Choose a step">
-        <button role="tab" type="button" aria-label="1. Drop a recording" aria-selected="true" tabindex="0"></button>
-        <button role="tab" type="button" aria-label="2. Key screenshots with their words" aria-selected="false" tabindex="-1"></button>
-        <button role="tab" type="button" aria-label="3. Click any moment" aria-selected="false" tabindex="-1"></button>
-        <button role="tab" type="button" aria-label="4. Fix what was misheard" aria-selected="false" tabindex="-1"></button>
-        <button role="tab" type="button" aria-label="5. Check every detail" aria-selected="false" tabindex="-1"></button>
+        <button role="tab" type="button" aria-selected="true" tabindex="0">Screenshots with their words</button>
+        <button role="tab" type="button" aria-selected="false" tabindex="-1">Click any moment</button>
+        <button role="tab" type="button" aria-selected="false" tabindex="-1">Fix what was misheard</button>
       </div>
       <figcaption class="note">Sample projects: a 12-minute FOSDEM 2024 talk (CC BY 2.0 BE) and a Russian Wikipedia webinar (CC BY-SA 4.0).</figcaption>
     </figure>
@@ -279,45 +280,53 @@
 
 <script>
 (function () {
-  // The tour: five quiet slides that cross-fade by themselves, stop when you point at or choose one, and never move for reduced motion.
+  // The tour: slides that change by themselves every 3 seconds. Pointing at it pauses it; tabs, arrows, a click on the picture,
+  // a swipe or the arrow keys move it. It never moves for reduced motion.
   (function () {
     var tour = document.getElementById('tour'); if (!tour) return;
-    var imgs = tour.querySelectorAll('.tour-frame img'), tabs = tour.querySelectorAll('[role=tab]'), text = tour.querySelector('.tour-text');
+    var frame = tour.querySelector('.tour-frame'), imgs = frame.querySelectorAll('img'), tabs = tour.querySelectorAll('[role=tab]'), text = tour.querySelector('.tour-text');
     var steps = [
-      ['Drop a recording', 'From Teams, Zoom, Meet or Loom. It stays on your Mac.'],
-      ['Key screenshots with their words', 'Every real change on screen gets a picture, its time and what was said.'],
+      ['Screenshots with their words', 'Every real change on screen gets a picture, its time and what was said.'],
       ['Click any moment', 'The video jumps there and the transcript follows.'],
-      ['Fix what was misheard', 'Doubtful words are flagged. Spell one once, it is fixed everywhere.'],
-      ['Check every detail', 'The original file, the model and every time are one click away. Then copy one line or save a ZIP for any AI.']
+      ['Fix what was misheard', 'Doubtful words are flagged. Spell one once, it is fixed everywhere.']
     ];
-    var dwell = 6000, now = 0, timer = null, userChose = false;
+    var dwell = 3000, now = 0, timer = null, paused = false, visible = false;
     var still = window.matchMedia('(prefers-reduced-motion: reduce)');
-    imgs.forEach(function (img, i) { img.classList.toggle('on', i === 0); });
     function show(i) {
       now = (i + steps.length) % steps.length;
       imgs.forEach(function (img, k) { img.classList.toggle('on', k === now); });
       tabs.forEach(function (tab, k) { tab.setAttribute('aria-selected', k === now ? 'true' : 'false'); tab.tabIndex = k === now ? 0 : -1; });
       var box = text.firstElementChild; box.style.opacity = 0;
-      setTimeout(function () { box.innerHTML = '<b></b><span></span>'; box.firstChild.textContent = steps[now][0]; box.lastChild.textContent = steps[now][1]; box.style.opacity = 1; }, 280);
-      if (tour.classList.contains('run')) { tour.classList.remove('run'); void tour.offsetWidth; tour.classList.add('run'); }
+      setTimeout(function () { box.innerHTML = '<span></span>'; box.firstChild.textContent = steps[now][1]; box.style.opacity = 1; }, 220);
+      schedule();
     }
-    function stop() { clearTimeout(timer); tour.classList.remove('run'); }
-    function play() {
-      stop(); if (userChose || still.matches || document.hidden) return;
-      tour.style.setProperty('--dwell', dwell + 'ms'); tour.classList.add('run');
-      timer = setTimeout(function () { show(now + 1); play(); }, dwell);
+    function schedule() {
+      clearTimeout(timer); tour.classList.remove('run');
+      if (paused || !visible || still.matches || document.hidden) return;
+      void tour.offsetWidth; tour.style.setProperty('--dwell', dwell + 'ms'); tour.classList.add('run');
+      timer = setTimeout(function () { show(now + 1); }, dwell);
     }
     tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () { userChose = true; stop(); show(i); });
+      tab.addEventListener('click', function () { show(i); });
       tab.addEventListener('keydown', function (e) {
         var go = e.key === 'ArrowRight' ? now + 1 : e.key === 'ArrowLeft' ? now - 1 : null; if (go === null) return;
-        e.preventDefault(); userChose = true; stop(); show(go); tabs[now].focus();
+        e.preventDefault(); show(go); tabs[now].focus();
       });
     });
-    tour.addEventListener('mouseenter', stop);
-    tour.addEventListener('mouseleave', play);
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else play(); });
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { if (e[0].isIntersecting) play(); else stop(); }, { threshold: 0.4 }).observe(tour); else play();
+    tour.querySelector('.prev').addEventListener('click', function (e) { e.stopPropagation(); show(now - 1); });
+    tour.querySelector('.next').addEventListener('click', function (e) { e.stopPropagation(); show(now + 1); });
+    frame.addEventListener('click', function () { show(now + 1); });
+    var startX = null;
+    frame.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    frame.addEventListener('touchend', function (e) {
+      if (startX === null) return; var dx = e.changedTouches[0].clientX - startX; startX = null;
+      if (Math.abs(dx) > 40) { show(now + (dx < 0 ? 1 : -1)); e.preventDefault(); }
+    });
+    tour.addEventListener('mouseenter', function () { paused = true; schedule(); });
+    tour.addEventListener('mouseleave', function () { paused = false; schedule(); });
+    document.addEventListener('visibilitychange', schedule);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; schedule(); }, { threshold: 0.4 }).observe(tour);
+    else { visible = true; schedule(); }
   })();
   // Copy buttons: copy the text of the element named in data-copy and say so.
   document.querySelectorAll('.copy').forEach(function (button) {
