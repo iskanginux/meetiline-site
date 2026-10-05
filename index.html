@@ -105,14 +105,15 @@
   .tour .note { color: var(--faint); font-size: 10.5px; line-height: 1.4; opacity: .55; margin-top: 8px; text-align: center; }
   .tour .note a { color: inherit; }
   /* Two quiet facts under the tour, in the app's own manner: a colour tile, a title, a detail line. */
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 720px; margin: 28px auto 0; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px auto 0; }
   .stat { display: flex; align-items: center; gap: 12px; padding: 12px 18px 12px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; text-align: left; }
   .stat .tile { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #fff; }
   .stat .tile.speed { background: linear-gradient(160deg, #3b8cff, #1f63e0); }
   .stat .tile.langs { background: linear-gradient(160deg, #3fcf8e, #22a06b); }
+  .stat .tile.free { background: linear-gradient(160deg, #a78bfa, #7c4dde); }
   .stat b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
   .stat span { display: block; color: var(--muted); font-size: 13px; line-height: 1.35; }
-  @media (max-width: 600px) { .stats { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .stats { grid-template-columns: 1fr; max-width: 460px; } }
 
   section { padding: 60px 0 0; }
   .eyebrow { text-align: center; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
@@ -315,11 +316,15 @@
     <div class="stats">
       <div class="stat">
         <span class="tile speed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5"/></svg></span>
-        <div><b>~2 minutes for an hour-long meeting</b><span>Offline, on an M4 Pro</span></div>
+        <div><b>~2 min per hour of meeting</b><span>Offline, on an M4 Pro</span></div>
       </div>
       <div class="stat">
         <span class="tile langs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></span>
         <div><b>English and Russian</b><span>The speech, and the text on screen</span></div>
+      </div>
+      <div class="stat">
+        <span class="tile free"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5a2.5 2 0 0 0-2.5-1.5c-1.4 0-2.5.8-2.5 2s1.1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2a2.5 2 0 0 1-2.5-1.5M12 6.5V8M12 16v1.5"/><path d="M5.6 5.6l12.8 12.8"/></svg></span>
+        <div><b>No AI tokens spent</b><span>No AI service or account needed</span></div>
       </div>
     </div>
   </div>
