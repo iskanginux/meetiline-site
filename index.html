@@ -161,6 +161,17 @@
   .script[open] summary::before { transform: rotate(90deg); }
   .script ol { margin: 8px 0 6px; padding-left: 18px; color: var(--muted); font-size: 12.5px; line-height: 1.55; display: grid; gap: 3px; }
   .script a { color: var(--muted); font-size: 12px; }
+  .linklike { background: none; border: 0; padding: 0; font: inherit; font-size: 12px; color: var(--muted); text-decoration: underline; cursor: pointer; }
+  .linklike:hover { color: var(--text); }
+  /* The full install script in a sheet over the page: read it, close it, nothing is downloaded. */
+  dialog.sheet { width: min(720px, calc(100vw - 32px)); max-height: min(80vh, 720px); padding: 0; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+  dialog.sheet::backdrop { background: rgba(0,0,0,.45); }
+  dialog.sheet[open] { display: flex; flex-direction: column; }
+  .sheet-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 12px 18px; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .sheet-close { width: 28px; height: 28px; border: 0; border-radius: 8px; background: var(--raised); color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+  .sheet-close:hover { color: var(--text); }
+  dialog.sheet pre { margin: 0; padding: 14px 18px; overflow: auto; }
+  dialog.sheet code { font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); white-space: pre; }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
@@ -301,18 +312,23 @@
         <p class="why">Open Terminal (<span class="k">⌘ Space</span>, type Terminal), paste, press <span class="k">Return</span>. With Homebrew: <code class="inline">brew install --cask iskanginux/tap/meetiline</code></p>
         <details class="script"><summary>See what it does</summary>
           <ol>
-            <li>Checks that this Mac has Apple silicon and macOS 14 or later.</li>
-            <li>Downloads the latest Meetiline from this site’s releases on GitHub.</li>
-            <li>Closes Meetiline if it is open and puts the new one in Applications.</li>
-            <li>Removes the “downloaded from the internet” mark, so macOS opens it without a warning.</li>
-            <li>Opens Meetiline and deletes its temporary files. Nothing else is touched or sent anywhere.</li>
+            <li>Checks your Mac is supported.</li>
+            <li>Downloads the latest Meetiline.</li>
+            <li>Puts it in Applications.</li>
+            <li>Lets macOS open it without a warning.</li>
+            <li>Opens it. Nothing else is changed.</li>
           </ol>
-          <a href="install.sh" target="_blank" rel="noopener">Full script</a>
+          <button class="linklike" type="button" data-open-script>Full script</button>
         </details>
       </div>
     </div>
     <p class="then">Then, in Meetiline, press <b>Download</b> next to <span class="tip" tabindex="0" aria-describedby="tip-model"><i>Speech model</i> (874 MB, once)<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-model"><b>Whisper large-v3 turbo</b> is an open speech-recognition model made by OpenAI (MIT licence), not part of Meetiline. The app downloads it once from <a href="https://huggingface.co/ggerganov/whisper.cpp" target="_blank" rel="noopener">Hugging Face</a> and runs it on your Mac with <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>, offline. <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">About Whisper</a></span></span> and drop a recording.<br>If the transcript doesn’t start after installing from the download, the Terminal line fixes that too.</p>
   </section>
+
+  <dialog class="sheet" id="script-sheet" aria-labelledby="script-title">
+    <div class="sheet-head"><b id="script-title">The install script</b><button type="button" class="sheet-close" aria-label="Close" data-close>×</button></div>
+    <pre><code>Loading…</code></pre>
+  </dialog>
 
   <section id="privacy">
     <p class="eyebrow">Privacy</p>
@@ -430,6 +446,23 @@
     document.addEventListener('visibilitychange', schedule);
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; schedule(); }, { threshold: 0.4 }).observe(tour);
     else { visible = true; schedule(); }
+  })();
+  // "Full script": the install script in a sheet over the page, read from the site the first time it is opened.
+  (function () {
+    var sheet = document.getElementById('script-sheet'); if (!sheet || !sheet.showModal) return;
+    var code = sheet.querySelector('code'), loaded = false;
+    document.querySelectorAll('[data-open-script]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        sheet.showModal();
+        if (loaded) return; loaded = true;
+        fetch('install.sh').then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+          .then(function (text) { code.textContent = text; })
+          .catch(function () { loaded = false; code.textContent = 'Could not load it. Try again in a moment.'; });
+      });
+    });
+    sheet.querySelector('[data-close]').addEventListener('click', function () { sheet.close(); });
+    // A click on the dimmed page around it closes it too.
+    sheet.addEventListener('click', function (e) { if (e.target === sheet) sheet.close(); });
   })();
   // Copy buttons: copy the text of the element named in data-copy and say so.
   document.querySelectorAll('.copy').forEach(function (button) {
