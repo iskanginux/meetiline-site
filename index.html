@@ -100,7 +100,7 @@
   .tour-tabs button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--muted); }
   .tour.run .tour-tabs button[aria-selected="true"]::after { animation: fill var(--dwell, 3s) linear forwards; }
   @keyframes fill { from { width: 0; } to { width: 100%; } }
-  .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 14px; text-align: center; }
+  .tour .note { color: var(--faint); font-size: 12.5px; margin-top: 12px; text-align: center; }
   /* Two numbers under the tour: how fast, which languages. Big figure, one short line each; not a section of its own. */
   .stats { display: flex; justify-content: center; margin: 30px auto 0; max-width: 640px; }
   .stat { flex: 1; text-align: center; padding: 4px 20px; }
@@ -223,13 +223,13 @@
         <button class="tour-arrow prev" type="button" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <button class="tour-arrow next" type="button" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
+      <figcaption class="note">Sample: <a href="https://www.drupal.org/project/drupal/issues/3625965" target="_blank" rel="noopener">Drupal Usability Meeting, 2 October 2026</a> by Benji Fisher (CC BY), processed by Meetiline.</figcaption>
       <div class="tour-text" aria-live="polite"><div><span>Every real change on screen gets a picture, its time and what was said.</span></div></div>
       <div class="tour-tabs" role="tablist" aria-label="Choose a step">
         <button role="tab" type="button" aria-selected="true" tabindex="0">Screenshots with their words</button>
         <button role="tab" type="button" aria-selected="false" tabindex="-1">Click any moment</button>
         <button role="tab" type="button" aria-selected="false" tabindex="-1">Fix what was misheard</button>
       </div>
-      <figcaption class="note">Sample: <a href="https://youtu.be/3YHPgdA8q4c" target="_blank" rel="noopener">Drupal Usability Meeting, 2 October 2026</a> by Benji Fisher (CC BY), processed by Meetiline.</figcaption>
     </figure>
     <div class="stats">
       <div class="stat"><b>~2 min</b><span>for a one-hour meeting, all on your Mac<br>(tested on an M4 Pro)</span></div>
