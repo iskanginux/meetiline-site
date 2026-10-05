@@ -131,11 +131,18 @@
   .fact span { color: var(--muted); font-size: 14px; }
   .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--green); margin-top: 7px; }
 
-  .install { max-width: 680px; margin: 0 auto; }
-  ol.first { list-style: none; counter-reset: n; margin: 0; padding: 0; display: grid; gap: 10px; }
-  ol.first li { counter-increment: n; display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; font-size: 15.5px; }
-  ol.first li::before { content: counter(n); flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--raised); display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--muted); margin-top: 1px; }
-  ol.first small { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+  /* Install: two plain ways side by side, a download for everyone and one line for those who like Terminal. */
+  .ways { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 860px; margin: 0 auto; }
+  .way { min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px 20px; }
+  .way h3 { margin: 0 0 8px; font-size: 17px; }
+  .way p { margin: 0 0 12px; color: var(--muted); font-size: 14.5px; }
+  .way ol { margin: 0 0 10px; padding-left: 20px; font-size: 14.5px; display: grid; gap: 6px; }
+  .way .why { font-size: 12.5px; color: var(--faint); margin: 0; line-height: 1.6; }
+  .way .why a { color: var(--muted); }
+  .way .cmd code { white-space: normal; overflow-wrap: anywhere; }
+  code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
+  .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
+  @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
   kbd, .k { font: inherit; font-weight: 600; background: var(--raised); border: 1px solid var(--border); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
   details { margin-top: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 4px 16px; }
   summary { cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 15px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
@@ -153,15 +160,9 @@
 
   .band { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px 24px; background-image: radial-gradient(closest-side at 50% 0%, rgba(10,132,255,.16), transparent); }
   .band h2 { margin-bottom: 20px; }
-  .fix { margin-top: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 20px; }
-  .fix-head { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
-  .fix-head > div { padding-top: 2px; }
-  .fix-head h3 { margin: 0 0 2px; font-size: 17px; }
-  .fix-head p { margin: 0; color: var(--muted); font-size: 14px; }
   .app { margin: 0; flex: none; width: 78px; padding: 8px 4px 7px; text-align: center; line-height: 1; background: var(--raised); border: 1px solid var(--border); border-radius: 18px; }
   .app figcaption { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--text); }
   .term-icon { display: block; margin: 0 auto; width: 56px; height: 56px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
-  .after { margin: 0; color: var(--muted); font-size: 14.5px; }
   ol.mini { margin: 0 0 14px; padding-left: 22px; color: var(--text); font-size: 15px; display: grid; gap: 8px; }
   ol.mini li::marker { color: var(--muted); font-weight: 700; }
   .table { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
@@ -258,27 +259,24 @@
 
   <section id="install">
     <p class="eyebrow">Install</p>
-    <h2>Open it the first time</h2>
-    <div class="install">
-      <ol class="first">
-        <li><div>Open the downloaded file and drag <b>Meetiline</b> to <b>Applications</b>.</div></li>
-        <li><div>Open Meetiline. If macOS says it can’t check it for malware, close that message.<small>Meetiline is not yet signed with an Apple Developer ID, so this message is expected, once.</small></div></li>
-        <li><div>Open <b>System Settings</b> › <b>Privacy &amp; Security</b>, scroll down and <span style="white-space:nowrap">press <span class="k">Open Anyway</span>.</span><small>Then enter your Mac password. After that it opens like any other app.</small></div></li>
-        <li><div>Press <b>Download</b> next to <i>Speech model</i> (874 MB, once). Then drop a recording.<small>Screenshots work without it; the transcript needs it. It works offline afterwards.</small></div></li>
-      </ol>
-      <div class="fix" id="fix">
-        <div class="fix-head">
-          <figure class="app"><img class="term-icon" src="terminal.png" alt="" width="64" height="64"><figcaption>Terminal</figcaption></figure>
-          <div><h3>If the transcript doesn’t start</h3><p>Rare, and takes a minute. You use Terminal, the app that comes with every Mac: just copy and paste.</p></div>
-        </div>
-        <ol class="mini">
-          <li>Quit Meetiline. Then open <b>Terminal</b>: press <span class="k">⌘ Space</span>, type <b>Terminal</b>, press <span class="k">Return</span>.</li>
-          <li>Press the button below to copy the line, click in the Terminal window, press <span class="k">⌘ V</span>, then <span class="k">Return</span>.</li>
+    <h2>Two ways, both take a minute</h2>
+    <div class="ways">
+      <div class="way">
+        <h3>Download</h3>
+        <ol>
+          <li>Open the file and drag <b>Meetiline</b> to <b>Applications</b>.</li>
+          <li>The first time, macOS asks you to confirm: <b>System Settings</b> › <b>Privacy &amp; Security</b> › <span class="k">Open Anyway</span>.</li>
         </ol>
-        <div class="cmd"><code id="cmd">xattr -dr com.apple.quarantine /Applications/Meetiline.app</code><button class="copy" type="button" data-copy="#cmd" aria-label="Copy the line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div>
-        <p class="after">Nothing appears when it works. Close Terminal and open Meetiline again.</p>
+        <p class="why">Meetiline is not yet signed with an Apple Developer ID, so macOS asks once.</p>
+      </div>
+      <div class="way">
+        <h3>One line in Terminal</h3>
+        <p>Installs it in Applications and opens it. No warning.</p>
+        <div class="cmd"><code id="cmd">curl -fsSL https://meetiline.iskan.kz/install | sh</code><button class="copy" type="button" data-copy="#cmd" aria-label="Copy the line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div>
+        <p class="why">Open Terminal (<span class="k">⌘ Space</span>, type Terminal), paste, press <span class="k">Return</span>. <a href="install.sh" target="_blank" rel="noopener">See what it does</a>. With Homebrew: <code class="inline">brew install --cask iskanginux/tap/meetiline</code></p>
       </div>
     </div>
+    <p class="then">Then, in Meetiline, press <b>Download</b> next to <i>Speech model</i> (874 MB, once) and drop a recording. If the transcript doesn’t start after installing from the download, the Terminal line fixes that too.</p>
   </section>
 
   <section id="privacy">
