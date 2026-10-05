@@ -43,20 +43,20 @@
   nav .pill:hover { color: #fff; filter: brightness(1.08); }
   @media (max-width: 640px) { nav a:not(.pill) { display: none; } }
 
-  .hero { text-align: center; padding: 48px 0 8px; position: relative; }
-  .hero::before { content: ""; position: absolute; left: 50%; top: 0; width: 420px; height: 420px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(10,132,255,.20), transparent); pointer-events: none; }
+  .hero { text-align: center; padding: 26px 0 8px; position: relative; }
+  .hero::before { content: ""; position: absolute; left: 50%; top: 0; width: 360px; height: 300px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(10,132,255,.20), transparent); pointer-events: none; }
   .hero > * { position: relative; }
-  .hero img.icon { width: 124px; height: 124px; filter: drop-shadow(0 14px 22px rgba(0,0,0,.45)); }
-  h1 { font-size: clamp(36px, 7vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin: 20px 0 14px; text-wrap: balance; }
-  .sub { color: var(--muted); font-size: clamp(17px, 2.4vw, 21px); margin: 0 auto 28px; max-width: 580px; text-wrap: balance; }
-  .button { display: inline-flex; align-items: center; gap: 9px; background: var(--blue); color: #fff; font-weight: 600; font-size: 17px; padding: 14px 28px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; box-shadow: 0 8px 24px rgba(10,132,255,.35); }
+  .hero img.icon { width: 76px; height: 76px; filter: drop-shadow(0 10px 16px rgba(0,0,0,.45)); }
+  h1 { font-size: clamp(30px, 5.4vw, 46px); line-height: 1.06; letter-spacing: -0.03em; margin: 12px 0 8px; text-wrap: balance; }
+  .sub { color: var(--muted); font-size: clamp(15.5px, 2vw, 18px); margin: 0 auto 18px; max-width: 640px; text-wrap: balance; }
+  .button { display: inline-flex; align-items: center; gap: 9px; background: var(--blue); color: #fff; font-weight: 600; font-size: 16px; padding: 11px 24px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; box-shadow: 0 8px 24px rgba(10,132,255,.35); }
   .button:hover { filter: brightness(1.08); transform: translateY(-1px); }
   .button:active { transform: none; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
   .badge { font-size: 12.5px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; }
-  .hint { color: var(--faint); font-size: 13.5px; margin-top: 12px; }
+  .hint { color: var(--faint); font-size: 13px; margin-top: 8px; }
   .hint a { color: var(--muted); }
-  .tour { margin: 44px auto 0; }
+  .tour { margin: 24px auto 0; }
   .tour-frame { position: relative; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: #181818; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.45); cursor: pointer; touch-action: pan-y; }
   .tour-frame img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .6s ease; -webkit-user-drag: none; user-select: none; }
   .tour-frame img.on { opacity: 1; }
