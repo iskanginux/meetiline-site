@@ -68,7 +68,7 @@
   .hint { color: var(--faint); font-size: 13px; margin-top: 8px; }
   .hero .hint { margin: 12px 0 0; }
   .hint a { color: var(--muted); }
-  .hint a.down { text-decoration: none; border-bottom: 1px dotted currentColor; display: inline-flex; align-items: center; gap: 4px; }
+  .hint a.down { display: inline-flex; align-items: center; gap: 4px; text-decoration: underline dotted color-mix(in srgb, currentColor 40%, transparent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
   .hint a.down:hover { color: var(--text); }
   .tour { margin: 24px auto 0; }
   /* The picture is as large as fits with the text and the buttons under it in one screen: its width follows the window's height. */
@@ -144,14 +144,14 @@
   .way .cmd code { white-space: normal; overflow-wrap: break-word; }
   .button.small { font-size: 14px; padding: 8px 16px; gap: 7px; margin: 2px 0 14px; box-shadow: none; }
   /* A word with more to say: dotted underline and a small "i"; the note opens on hover or focus and its links can be clicked. */
-  .tip { position: relative; border-bottom: 1px dotted var(--faint); cursor: help; outline: none; white-space: nowrap; }
+  .tip { position: relative; cursor: help; outline: none; white-space: nowrap; text-decoration: underline dotted color-mix(in srgb, currentColor 40%, transparent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
   .tip-i { display: inline-grid; place-items: center; width: 14px; height: 14px; margin-left: 4px; border-radius: 50%; border: 1px solid var(--faint); color: var(--faint); font: 600 9.5px/1 -apple-system, sans-serif; font-style: normal; vertical-align: 1px; }
   .tip-box { display: none; position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%); width: 300px; padding: 12px 14px; margin-bottom: 10px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); font-size: 13px; line-height: 1.5; text-align: left; white-space: normal; cursor: auto; z-index: 5; }
   .tip-box b { color: var(--text); }
   .tip-box a { color: var(--text); }
   .tip-box::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 12px; }
   .tip:hover .tip-box, .tip:focus-within .tip-box { display: block; }
-  .tip:focus-visible { border-bottom-color: var(--blue); }
+  .tip:focus-visible { text-decoration-color: var(--blue); }
   /* What the install line does, in plain words; the script itself one click further. */
   .script { margin-top: 10px; font-size: 12.5px; background: none; border: 0; border-radius: 0; padding: 0; }
   .script summary { cursor: pointer; color: var(--muted); list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 0; font-weight: 400; font-size: 12.5px; justify-content: flex-start; }
