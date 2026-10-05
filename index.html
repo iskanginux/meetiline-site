@@ -141,6 +141,15 @@
   .way .why a { color: var(--muted); }
   .way .cmd code { white-space: normal; overflow-wrap: anywhere; }
   .button.small { font-size: 14px; padding: 8px 16px; gap: 7px; margin: 2px 0 14px; box-shadow: none; }
+  /* A word with more to say: dotted underline and a small "i"; the note opens on hover or focus and its links can be clicked. */
+  .tip { position: relative; border-bottom: 1px dotted var(--faint); cursor: help; outline: none; white-space: nowrap; }
+  .tip-i { display: inline-grid; place-items: center; width: 14px; height: 14px; margin-left: 4px; border-radius: 50%; border: 1px solid var(--faint); color: var(--faint); font: 600 9.5px/1 -apple-system, sans-serif; font-style: normal; vertical-align: 1px; }
+  .tip-box { display: none; position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%); width: 300px; padding: 12px 14px; margin-bottom: 10px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); font-size: 13px; line-height: 1.5; text-align: left; white-space: normal; cursor: auto; z-index: 5; }
+  .tip-box b { color: var(--text); }
+  .tip-box a { color: var(--text); }
+  .tip-box::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 12px; }
+  .tip:hover .tip-box, .tip:focus-within .tip-box { display: block; }
+  .tip:focus-visible { border-bottom-color: var(--blue); }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
@@ -281,7 +290,7 @@
         <p class="why">Open Terminal (<span class="k">⌘ Space</span>, type Terminal), paste, press <span class="k">Return</span>. <a href="install.sh" target="_blank" rel="noopener">See what it does</a>. With Homebrew: <code class="inline">brew install --cask iskanginux/tap/meetiline</code></p>
       </div>
     </div>
-    <p class="then">Then, in Meetiline, press <b>Download</b> next to <i>Speech model</i> (874 MB, once) and drop a recording. If the transcript doesn’t start after installing from the download, the Terminal line fixes that too.</p>
+    <p class="then">Then, in Meetiline, press <b>Download</b> next to <span class="tip" tabindex="0" aria-describedby="tip-model"><i>Speech model</i> (874 MB, once)<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-model"><b>Whisper large-v3 turbo</b> is an open speech-recognition model made by OpenAI (MIT licence), not part of Meetiline. The app downloads it once from <a href="https://huggingface.co/ggerganov/whisper.cpp" target="_blank" rel="noopener">Hugging Face</a> and runs it on your Mac with <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>, offline. <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">About Whisper</a></span></span> and drop a recording. If the transcript doesn’t start after installing from the download, the Terminal line fixes that too.</p>
   </section>
 
   <section id="privacy">
