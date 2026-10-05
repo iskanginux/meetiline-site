@@ -140,6 +140,7 @@
   .way .why { font-size: 12.5px; color: var(--faint); margin: 0; line-height: 1.6; }
   .way .why a { color: var(--muted); }
   .way .cmd code { white-space: normal; overflow-wrap: anywhere; }
+  .button.small { font-size: 14px; padding: 8px 16px; gap: 7px; margin: 2px 0 14px; box-shadow: none; }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
@@ -262,7 +263,11 @@
     <h2>Two ways, both take a minute</h2>
     <div class="ways">
       <div class="way">
-        <h3>Download</h3>
+        <h3>The usual way</h3>
+        <a class="button small" href="https://github.com/iskanginux/meetiline-site/releases/latest/download/Meetiline.dmg" data-download>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+          Download Meetiline
+        </a>
         <ol>
           <li>Open the file and drag <b>Meetiline</b> to <b>Applications</b>.</li>
           <li>The first time, macOS asks you to confirm: <b>System Settings</b> › <b>Privacy &amp; Security</b> › <span class="k">Open Anyway</span>.</li>
