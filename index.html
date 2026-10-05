@@ -178,8 +178,14 @@
   .copy.icon .i-done { display: none; }
   .copy.icon[data-done="true"] .i-copy { display: none; }
   .copy.icon[data-done="true"] .i-done { display: block; }
+  /* The step both ways share, as a full card under them, not a footnote. */
+  .last { display: flex; gap: 14px; align-items: flex-start; max-width: 860px; margin: 14px auto 0; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; }
+  .last .tile { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(160deg, #3fcf8e, #22a06b); }
+  .last h3 { margin: 0 0 4px; font-size: 17px; }
+  .last p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .last p b { color: var(--text); }
+  .last .note { margin-top: 8px; font-size: 12.5px; color: var(--faint); }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
-  .then { max-width: 860px; margin: 14px auto 0; color: var(--muted); font-size: 14px; text-align: center; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
   kbd, .k { font: inherit; font-weight: 600; background: var(--raised); border: 1px solid var(--border); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
   details { margin-top: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 4px 16px; }
@@ -328,7 +334,14 @@
         </details>
       </div>
     </div>
-    <p class="then">Then, in Meetiline, press <b>Download</b> next to <span class="tip" tabindex="0" aria-describedby="tip-model"><i>Speech model</i> (874 MB, once)<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-model"><b>Whisper large-v3 turbo</b> is an open speech-recognition model made by OpenAI (MIT licence), not part of Meetiline. The app downloads it once from <a href="https://huggingface.co/ggerganov/whisper.cpp" target="_blank" rel="noopener">Hugging Face</a> and runs it on your Mac with <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>, offline. <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">About Whisper</a></span></span> and drop a recording.<br>If the transcript doesn’t start after installing from the download, the Terminal line fixes that too.</p>
+    <div class="last">
+      <span class="tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></span>
+      <div>
+        <h3>Last step: the speech model</h3>
+        <p>Open Meetiline and press <b>Download</b> next to <span class="tip" tabindex="0" aria-describedby="tip-model"><b>Speech model</b><span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-model"><b>Whisper large-v3 turbo</b> is an open speech-recognition model made by OpenAI (MIT licence), not part of Meetiline. The app downloads it once from <a href="https://huggingface.co/ggerganov/whisper.cpp" target="_blank" rel="noopener">Hugging Face</a> and runs it on your Mac with <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>, offline. <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">About Whisper</a></span></span>. It is 874 MB, downloaded once; after that everything works offline.</p>
+        <p class="note">The transcript doesn’t start after installing from the download? Run the Terminal line above, it fixes that.</p>
+      </div>
+    </div>
   </section>
 
   <dialog class="sheet" id="script-sheet" aria-labelledby="script-title">
