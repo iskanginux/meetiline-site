@@ -141,7 +141,7 @@
   .way ol { margin: 0 0 10px; padding-left: 20px; font-size: 14.5px; display: grid; gap: 6px; }
   .way .why { font-size: 12.5px; color: var(--faint); margin: 0; line-height: 1.6; }
   .way .why a { color: var(--muted); }
-  .way .cmd code { white-space: normal; overflow-wrap: anywhere; }
+  .way .cmd code { white-space: normal; overflow-wrap: break-word; }
   .button.small { font-size: 14px; padding: 8px 16px; gap: 7px; margin: 2px 0 14px; box-shadow: none; }
   /* A word with more to say: dotted underline and a small "i"; the note opens on hover or focus and its links can be clicked. */
   .tip { position: relative; border-bottom: 1px dotted var(--faint); cursor: help; outline: none; white-space: nowrap; }
@@ -175,7 +175,7 @@
   .cmd code { flex: 1; min-width: 0; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; overflow-x: auto; scrollbar-width: none; padding: 8px 0; user-select: all; }
   .cmd code::-webkit-scrollbar { display: none; }
   @media (max-width: 520px) { .cmd { flex-wrap: wrap; } .cmd code { flex-basis: 100%; } .cmd .copy { width: 100%; justify-content: center; } }
-  .copy { flex: none; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: 600 13px/1 inherit; padding: 9px 12px; border-radius: 9px; cursor: pointer; }
+  .copy { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 92px; gap: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: 600 13px/1 inherit; padding: 9px 12px; border-radius: 9px; cursor: pointer; }
   .copy:hover { background: var(--raised); }
   .copy[data-done="true"] { color: var(--green); border-color: var(--green); }
 
