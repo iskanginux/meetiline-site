@@ -184,7 +184,6 @@
   .last h3 { margin: 0 0 4px; font-size: 17px; }
   .last p { margin: 0; color: var(--muted); font-size: 14.5px; }
   .last p b { color: var(--text); }
-  .last .note { margin-top: 8px; font-size: 12.5px; color: var(--faint); }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
   kbd, .k { font: inherit; font-weight: 600; background: var(--raised); border: 1px solid var(--border); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
@@ -339,7 +338,6 @@
       <div>
         <h3>Last step: the speech model</h3>
         <p>Open Meetiline and press <b>Download</b> next to <span class="tip" tabindex="0" aria-describedby="tip-model"><b>Speech model</b><span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-model"><b>Whisper large-v3 turbo</b> is an open speech-recognition model made by OpenAI (MIT licence), not part of Meetiline. The app downloads it once from <a href="https://huggingface.co/ggerganov/whisper.cpp" target="_blank" rel="noopener">Hugging Face</a> and runs it on your Mac with <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>, offline. <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">About Whisper</a></span></span>. It is 874 MB, downloaded once; after that everything works offline.</p>
-        <p class="note">The transcript doesn’t start after installing from the download? Run the Terminal line above, it fixes that.</p>
       </div>
     </div>
   </section>
