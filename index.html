@@ -218,15 +218,15 @@
   .band { --lh: 222px; --side: calc(var(--lh) * 1.19 + 12px); position: relative; overflow: visible; padding: 26px var(--side); display: flex; flex-direction: column; justify-content: center; align-items: center; }
   .band h2 { font-size: 26px; text-wrap: balance; }
   .band-robot { position: absolute; bottom: 0; width: auto; pointer-events: none; user-select: none; }
-  .band-robot.left { left: 4px; height: var(--lh); }
-  .band-robot.right { right: 16px; height: calc(var(--lh) * 0.56); }
+  .band-robot.left { left: -18px; height: var(--lh); }
+  .band-robot.right { right: 1px; bottom: -17px; height: calc(var(--lh) * 0.56); }
   @media (max-width: 1060px) { .band { --lh: 200px; padding-top: 20px; padding-bottom: 20px; } .band h2 { font-size: 22px; } }
   /* Phones and small tablets: the text first, the two robots under it, side by side, with room kept for them. */
   @media (max-width: 860px) {
     .band { --lh: 150px; padding: 30px 18px calc(var(--lh) + 12px); }
     .band h2 { font-size: 24px; }
     .band-robot.left { left: 8px; }
-    .band-robot.right { right: 12px; }
+    .band-robot.right { right: 12px; bottom: 0; }
   }
   @media (max-width: 380px) { .band { --lh: 122px; } }
   .app { margin: 0; flex: none; width: 78px; padding: 8px 4px 7px; text-align: center; line-height: 1; background: var(--raised); border: 1px solid var(--border); border-radius: 18px; }
