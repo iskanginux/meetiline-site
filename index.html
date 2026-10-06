@@ -36,7 +36,9 @@
   .skip:focus { top: 12px; }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
-  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; }
+  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+  /* A thin line under the header once the page is scrolled; none at the very top. */
+  header.top.scrolled { border-bottom-color: color-mix(in srgb, var(--border) 80%, transparent); }
   header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
   .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; }
     nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
@@ -544,6 +546,13 @@
     sheet.querySelector('[data-close]').addEventListener('click', function () { sheet.close(); });
     // A click on the dimmed page around it closes it too.
     sheet.addEventListener('click', function (e) { if (e.target === sheet) sheet.close(); });
+  })();
+  // The header's line appears only once the page is scrolled.
+  (function () {
+    var header = document.querySelector('header.top'); if (!header) return;
+    function mark() { header.classList.toggle('scrolled', window.scrollY > 4); }
+    mark();
+    window.addEventListener('scroll', mark, { passive: true });
   })();
   // Copy buttons: copy the text of the element named in data-copy and say so.
   document.querySelectorAll('.copy').forEach(function (button) {
