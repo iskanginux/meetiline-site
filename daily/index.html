@@ -79,7 +79,7 @@
   .hint a.down:hover { color: var(--text); }
   .tour { margin: 24px auto 0; }
   /* The picture is as large as fits with the text and the buttons under it in one screen: its width follows the window's height. */
-  .tour-frame { position: relative; width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 0 auto; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: var(--shot); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: pointer; touch-action: pan-y; }
+  .tour-frame { position: relative; width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 0 auto; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: var(--shot); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: e-resize; touch-action: pan-y; }
   .tour-frame .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; }
   .tour-frame .slide.on { opacity: 1; }
   .tour-frame img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; -webkit-user-drag: none; user-select: none; }
@@ -93,11 +93,7 @@
   /* Theme: a small three-way switch in the header. */
   .theme { width: 32px; height: 32px; display: grid; place-items: center; padding: 0; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--muted); cursor: pointer; transition: color .15s ease, background .15s ease; }
   .theme:hover { color: var(--text); background: var(--raised); }
-  .tour-arrow { position: absolute; top: 50%; width: 34px; height: 48px; margin-top: -24px; padding: 0; border: 1px solid var(--arrow-line); border-radius: 10px; background: var(--arrow-bg); color: var(--arrow-fg); box-shadow: var(--arrow-shadow); cursor: pointer; display: grid; place-items: center; opacity: 0; transition: opacity .2s ease, background .2s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-  .tour-arrow:hover { background: var(--arrow-bg-hover); }
-  .tour-arrow.prev { left: 8px; } .tour-arrow.next { right: 8px; }
-  .tour-frame:hover .tour-arrow, .tour-arrow:focus-visible { opacity: 1; }
-  @media (hover: none) { .tour-arrow { opacity: .85; width: 34px; height: 48px; margin-top: -24px; } }
+    @media (hover: none) { .tour-arrow { opacity: .85; width: 34px; height: 48px; margin-top: -24px; } }
   /* The step captions are kept for screen readers only; on screen the step buttons say enough. */
   .tour-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .tour-text span { display: block; color: var(--text); font-size: 15.5px; line-height: 1.45; }
@@ -322,7 +318,7 @@
     .badge { font-size: 12px; padding: 3px 10px; }
     .hero { padding-top: 32px; }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } .tour-frame .slide, .tour-text > div, .tour-arrow, .theme { transition: none; } .tour-tabs button::after { animation: none !important; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } .tour-frame .slide, .tour-text > div, .theme { transition: none; } .tour-tabs button::after { animation: none !important; } }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Meetiline Daily","applicationCategory":"BusinessApplication","operatingSystem":"macOS 14.2+","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Records every call on your Mac by itself, you and the others on two separate tracks, plus your screen. Ask your own AI what was said."}</script>
 </head>
@@ -364,8 +360,6 @@
         <div class="slide"><picture><source srcset="slides/1-results.avif" type="image/avif"><source srcset="slides/1-results.webp" type="image/webp"><img class="dk" src="slides/1-results.jpg" width="2400" height="1376" alt="Screenshots of a recorded usability meeting, the video and the transcript under each screenshot, and the Give to AI panel"></picture><picture><source srcset="slides/1-results-light.avif" type="image/avif"><source srcset="slides/1-results-light.webp" type="image/webp"><img class="lt" src="slides/1-results-light.jpg" width="2400" height="1376" alt="Screenshots of a recorded usability meeting, the video and the transcript under each screenshot, and the Give to AI panel"></picture></div>
         <div class="slide"><picture><source srcset="slides/2-moment.avif" type="image/avif"><source srcset="slides/2-moment.webp" type="image/webp"><img class="dk" src="slides/2-moment.jpg" width="2400" height="1376" alt="A screenshot picked in the list, the video at that moment and the words said around it" loading="lazy"></picture><picture><source srcset="slides/2-moment-light.avif" type="image/avif"><source srcset="slides/2-moment-light.webp" type="image/webp"><img class="lt" src="slides/2-moment-light.jpg" width="2400" height="1376" alt="A screenshot picked in the list, the video at that moment and the words said around it" loading="lazy"></picture></div>
         <div class="slide"><picture><source srcset="slides/4-speakers.avif" type="image/avif"><source srcset="slides/4-speakers.webp" type="image/webp"><img class="dk" src="slides/4-speakers.jpg" width="2400" height="1376" alt="A speaker being named in the transcript; the same name appears over all their words" loading="lazy"></picture><picture><source srcset="slides/4-speakers-light.avif" type="image/avif"><source srcset="slides/4-speakers-light.webp" type="image/webp"><img class="lt" src="slides/4-speakers-light.jpg" width="2400" height="1376" alt="A speaker being named in the transcript; the same name appears over all their words" loading="lazy"></picture></div>
-        <button class="tour-arrow prev" type="button" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button class="tour-arrow next" type="button" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <figcaption class="note"><span class="tip" tabindex="0" aria-describedby="tip-sample">Sample<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-sample">The first picture is the real app showing a made-up call (the people are drawn). The meeting in the others is a public sample: <a href="https://www.drupal.org/project/drupal/issues/3625965" target="_blank" rel="noopener">Drupal Usability Meeting, 2 October 2026</a> by Benji Fisher (CC BY), processed by Meetiline.</span></span></figcaption>
       <div class="tour-text" aria-live="polite"><div><span>You and the others on two tracks, and your screen. Nothing to press.</span></div></div>
@@ -570,9 +564,10 @@
         e.preventDefault(); show(go); tabs[now].focus();
       });
     });
-    tour.querySelector('.prev').addEventListener('click', function (e) { e.stopPropagation(); show(now - 1); });
-    tour.querySelector('.next').addEventListener('click', function (e) { e.stopPropagation(); show(now + 1); });
-    frame.addEventListener('click', function () { show(now + 1); });
+    // No buttons on the picture: its right half goes forward, its left half back.
+    function leftHalf(e) { var box = frame.getBoundingClientRect(); return e.clientX < box.left + box.width / 2; }
+    frame.addEventListener('click', function (e) { show(leftHalf(e) ? now - 1 : now + 1); });
+    frame.addEventListener('mousemove', function (e) { frame.style.cursor = leftHalf(e) ? 'w-resize' : 'e-resize'; });
     var startX = null;
     frame.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
     frame.addEventListener('touchend', function (e) {
