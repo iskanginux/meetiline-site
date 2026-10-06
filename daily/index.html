@@ -123,6 +123,7 @@
   .stat .tile.speed { background: linear-gradient(160deg, #3b8cff, #1f63e0); }
   .stat .tile.langs { background: linear-gradient(160deg, #3fcf8e, #22a06b); }
   .stat .tile.free { background: linear-gradient(160deg, #a78bfa, #7c4dde); }
+  .stat .tile.auto { background: linear-gradient(160deg, #ff6b61, #e0372c); }
   .stat .tile.who { background: linear-gradient(160deg, #ff9f5a, #e8692c); }
   .stat b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
   .stat span { display: block; color: var(--muted); font-size: 13px; line-height: 1.35; }
@@ -380,6 +381,10 @@
     </figure>
     <div class="stats">
       <div class="stat">
+        <span class="tile auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2" fill="currentColor"/></svg></span>
+        <div><b>Starts by itself</b><span>A call begins, it records. The call ends, it saves. Nothing to press.</span></div>
+      </div>
+      <div class="stat">
         <span class="tile speed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A4.6 4.6 0 0 1 21 18.5"/></svg></span>
         <div><b>Two separate tracks</b><span>You and the others, headphones or not</span></div>
       </div>
@@ -390,10 +395,6 @@
       <div class="stat">
         <span class="tile free"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></span>
         <div><b>Transcript on your Mac</b><span>English, Russian and more, offline</span></div>
-      </div>
-      <div class="stat">
-        <span class="tile who"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/></svg></span>
-        <div><b>Ask your own AI</b><span>Claude, ChatGPT, anything</span></div>
       </div>
     </div>
   </div>
