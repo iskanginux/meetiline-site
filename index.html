@@ -136,7 +136,10 @@
   .card h3 i { font-style: normal; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
   .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
 
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  /* Four in a row, two by two, or one under another: never three and one. */
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 1000px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .facts { grid-template-columns: 1fr; } }
   .fact { display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; row-gap: 10px; align-items: center; align-content: start; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
   /* Icon and title on one line, centred to each other; the detail below both, full width. */
   .fact > div { display: contents; }
