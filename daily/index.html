@@ -79,7 +79,7 @@
   .hint a.down:hover { color: var(--text); }
   .tour { margin: 24px auto 0; }
   /* The picture is as large as fits with the text and the buttons under it in one screen: its width follows the window's height. */
-  .tour-frame { position: relative; width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 0 auto; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: var(--shot); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: e-resize; touch-action: pan-y; }
+  .tour-frame { position: relative; width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 0 auto; aspect-ratio: 2400 / 1376; border-radius: 14px; overflow: hidden; background: var(--shot); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: default; touch-action: pan-y; }
   .tour-frame .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; }
   .tour-frame .slide.on { opacity: 1; }
   .tour-frame img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; -webkit-user-drag: none; user-select: none; }
@@ -566,7 +566,6 @@
     // No buttons on the picture: its right half goes forward, its left half back.
     function leftHalf(e) { var box = frame.getBoundingClientRect(); return e.clientX < box.left + box.width / 2; }
     frame.addEventListener('click', function (e) { show(leftHalf(e) ? now - 1 : now + 1); });
-    frame.addEventListener('mousemove', function (e) { frame.style.cursor = leftHalf(e) ? 'w-resize' : 'e-resize'; });
     var startX = null;
     frame.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
     frame.addEventListener('touchend', function (e) {
