@@ -1,0 +1,37 @@
+Meetiline Daily licence
+
+Copyright © 2026 Iskandar Gubaydullin (https://iskan.kz). All rights reserved.
+
+Meetiline Daily is free. This licence says what you may and may not do with it.
+
+1. Use. You may download, install and use Meetiline Daily free of charge, for personal and for work purposes, on as many
+   of your own Macs as you like. It is provided as a program only; the source code is not provided.
+
+2. Sharing. You may share the official download link of Meetiline Daily. You may pass on the installer only unchanged
+   and only free of charge.
+
+3. Not allowed. You may not sell, rent, lease or sublicense Meetiline Daily or any part of it; bundle it with something
+   you sell; distribute changed copies of it; or present it, or a copy of it, as your own work.
+
+4. No taking apart. You may not reverse engineer, decompile or disassemble Meetiline Daily, except where the law allows
+   this in spite of this licence.
+
+5. Open-source parts. Meetiline Daily contains open-source components. Each stays under its own licence (see
+   "Open-source licences"), and nothing here limits the rights those licences give you.
+
+6. Your material. Your recordings and everything Meetiline Daily makes from them belong to you. Meetiline Daily claims no
+   rights in them and sends nothing anywhere itself. If you connect an AI app to it, that app reads what you ask it
+   about, under that app's own terms.
+
+7. Recording people. Recording a call can be regulated or forbidden where you or the other people are. You alone are
+   responsible for recording lawfully and for telling the others and asking their consent where the law requires it.
+   Meetiline Daily is not made for, and must not be used for, recording people in secret.
+
+8. No warranty. Meetiline Daily is provided "as is", without warranty of any kind, and is beta software. As far as the
+   law allows, the author is not liable for any loss or damage arising from its use, including a call that was not
+   recorded or was recorded badly.
+
+9. Anything else. For uses this licence does not allow (for example selling Meetiline Daily, offering it inside a
+   product, or a licence for a company), ask the author: https://iskan.kz.
+
+Using Meetiline Daily means you accept this licence.

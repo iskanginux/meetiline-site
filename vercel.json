@@ -43,12 +43,36 @@
           "value": "public, max-age=300"
         }
       ]
+    },
+    {
+      "source": "/daily/install(.sh)?",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60"
+        }
+      ]
     }
   ],
   "rewrites": [
     {
       "source": "/install",
       "destination": "/install.sh"
+    },
+    {
+      "source": "/daily/install",
+      "destination": "/daily/install.sh"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/daily",
+      "destination": "/daily/",
+      "permanent": false
     }
   ]
 }
