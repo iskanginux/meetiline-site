@@ -1,0 +1,31 @@
+Meetiline licence
+
+Copyright © 2026 Iskandar Gubaydullin (https://iskan.kz). All rights reserved.
+
+Meetiline is free. This licence says what you may and may not do with it.
+
+1. Use. You may download, install and use Meetiline free of charge, for personal and for work purposes, on as many of your
+   own Macs as you like.
+
+2. Sharing. You may share the official download link (https://meetiline.iskan.kz). You may pass on the installer only
+   unchanged and only free of charge.
+
+3. Not allowed. You may not sell, rent, lease or sublicense Meetiline or any part of it; bundle it with something you
+   sell; distribute changed copies of it; or present it, or a copy of it, as your own work.
+
+4. No taking apart. You may not reverse engineer, decompile or disassemble Meetiline, except where the law allows this
+   in spite of this licence.
+
+5. Open-source parts. Meetiline contains open-source components. Each stays under its own licence (see
+   "Open-source licences"), and nothing here limits the rights those licences give you.
+
+6. Your material. Your recordings and everything Meetiline makes from them belong to you. Meetiline claims no rights in
+   them and sends nothing anywhere.
+
+7. No warranty. Meetiline is provided "as is", without warranty of any kind. As far as the law allows, the author is not
+   liable for any loss or damage arising from its use.
+
+8. Anything else. For uses this licence does not allow (for example selling Meetiline, offering it inside a product,
+   or a licence for a company), ask the author: https://iskan.kz.
+
+Using Meetiline means you accept this licence.
