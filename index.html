@@ -91,11 +91,11 @@
   .tour-arrow.prev { left: 8px; } .tour-arrow.next { right: 8px; }
   .tour-frame:hover .tour-arrow, .tour-arrow:focus-visible { opacity: 1; }
   @media (hover: none) { .tour-arrow { opacity: .85; width: 34px; height: 48px; margin-top: -24px; } }
-  .tour-text { text-align: center; margin: 14px auto 0; min-height: 24px; max-width: 560px; }
+  /* The step captions are kept for screen readers only; on screen the step buttons say enough. */
+  .tour-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .tour-text span { display: block; color: var(--text); font-size: 15.5px; line-height: 1.45; }
-  @media (max-width: 640px) { .tour-text { min-height: 45px; } }
   .tour-text > div { transition: opacity .3s ease; }
-  .tour-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tour-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
   .tour-tabs button { position: relative; overflow: hidden; padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 13.5px; cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
   .tour-tabs button:hover { color: var(--text); }
   .tour-tabs button[aria-selected="true"] { color: var(--text); background: var(--raised); border-color: color-mix(in srgb, var(--muted) 40%, var(--border)); }
