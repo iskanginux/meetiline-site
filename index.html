@@ -104,7 +104,8 @@
   @keyframes fill { from { width: 0; } to { width: 100%; } }
   /* "Sample ⓘ" under the right edge of the screenshot; who made the recording and its licence in the note it opens. */
   .tour .note { width: min(100%, max(520px, calc((100vh - 60px - 130px) * 2400 / 1376))); margin: 8px auto 0; text-align: right; font-size: 11.5px; line-height: 1.4; }
-  .tour .note > .tip { color: var(--faint); text-decoration: none; }
+  .tour .note > .tip { color: var(--faint); text-decoration: none; opacity: .55; transition: opacity .15s ease; }
+  .tour .note > .tip:hover, .tour .note > .tip:focus-within { opacity: 1; }
   .tour .note .tip-box { left: auto; right: -6px; transform: none; width: 280px; font-size: 12.5px; }
   /* Two quiet facts under the tour, in the app's own manner: a colour tile, a title, a detail line. */
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 760px; margin: 70px auto 0; }
