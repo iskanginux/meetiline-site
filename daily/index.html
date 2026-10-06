@@ -246,7 +246,15 @@
   .cmd { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 6px 6px 6px 14px; margin: 0 0 14px; }
   .cmd code { flex: 1; min-width: 0; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; overflow-x: auto; scrollbar-width: none; padding: 8px 0; user-select: all; }
   .cmd code::-webkit-scrollbar { display: none; }
-  @media (max-width: 520px) { .cmd { flex-wrap: wrap; } .cmd code { flex-basis: 100%; } .cmd .copy { width: 100%; justify-content: center; } }
+  @media (max-width: 520px) {
+    .cmd { flex-wrap: wrap; padding: 12px; gap: 10px; }
+    .cmd code { flex-basis: 100%; padding: 0; }
+    .cmd.two code { white-space: normal; font-size: 11px; overflow: visible; }
+    .cmd .copy { width: 100%; justify-content: center; }
+    .cmd .copy.icon { width: 100%; height: 40px; gap: 8px; font-weight: 600; font-size: 14px; border-radius: 10px; }
+    .cmd .copy.icon::after { content: "Copy the line"; }
+    .cmd .copy.icon[data-done="true"]::after { content: "Copied"; }
+  }
   .copy { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 92px; gap: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: 600 13px/1 inherit; padding: 9px 12px; border-radius: 9px; cursor: pointer; }
   .copy:hover { background: var(--raised); }
   .copy[data-done="true"] { color: var(--green); border-color: var(--green); }
