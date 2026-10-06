@@ -212,6 +212,29 @@
   .last p b { color: var(--text); }
   code.inline { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--raised); border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
   @media (max-width: 760px) { .ways { grid-template-columns: 1fr; } }
+  /* macOS's own icons, small, inline with their names; and the three windows the first launch shows, drawn in miniature. */
+  .mac { white-space: nowrap; font-weight: 600; color: var(--text); }
+  .nw { white-space: nowrap; }
+  .sep { margin: 0 1px; color: var(--faint); }
+  .mi { display: inline-block; width: 18px; height: 18px; border-radius: 4.6px; margin-right: 6px; vertical-align: -3.5px; overflow: hidden; box-shadow: 0 .5px 1.5px rgba(0,0,0,.25), inset 0 0 0 .5px rgba(0,0,0,.12); }
+  .mi svg { display: block; width: 100%; height: 100%; }
+  .mi.gear { background: linear-gradient(#f4f4f6, #c9c9cf); color: #626268; padding: 2px; box-sizing: border-box; }
+  .mi.hand { background: linear-gradient(#48a3ff, #0b6ee6); padding: 2.5px; box-sizing: border-box; }
+  .mb { display: inline-block; padding: 0 9px; border-radius: 999px; background: color-mix(in srgb, var(--text) 9%, transparent); color: var(--text); font-weight: 500; font-size: .94em; line-height: 1.55; white-space: nowrap; }
+  .look .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0 2px; }
+  .look figure { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .mock { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 12px 11px 11px; background: var(--raised); border-radius: 14px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border) 70%, transparent); font-size: 10.5px; line-height: 1.35; color: var(--muted); }
+  .mock b { color: var(--text); font-size: 11px; text-wrap: balance; }
+  .mock .warn { width: 20px; height: 20px; }
+  .mock .pane { display: flex; align-items: center; color: var(--text); font-weight: 600; font-size: 11px; }
+  .mock .pane .mi { width: 15px; height: 15px; border-radius: 4px; margin-right: 5px; padding: 2px; }
+  .mock .btns { align-self: stretch; display: grid; gap: 4px; margin-top: auto; }
+  .mock .btn { position: relative; padding: 3.5px 4px; border-radius: 999px; text-align: center; background: color-mix(in srgb, var(--text) 7%, transparent); color: var(--faint); white-space: nowrap; }
+  .mock .btn.go { background: var(--blue); color: #fff; font-weight: 600; }
+  .mock .cursor { position: absolute; right: 7%; top: 58%; width: 10px; height: 14px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); }
+  .look figcaption { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; line-height: 1.3; }
+  .look figcaption i { font-style: normal; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--text) 10%, transparent); color: var(--text); display: grid; place-items: center; font-size: 10px; font-weight: 700; flex: none; }
+  @media (max-width: 440px) { .look .shots { grid-template-columns: 1fr; max-width: 230px; } }
   kbd, .k { font: inherit; font-weight: 600; background: var(--raised); border: 1px solid var(--border); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
   details { margin-top: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 4px 16px; }
   summary { cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 15px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
@@ -268,7 +291,16 @@
   tr:first-child > * { border-top: 0; }
   th { font-weight: 600; white-space: nowrap; }
   td { color: var(--muted); }
-  .tag { display: inline-block; font-size: 11.5px; font-weight: 600; color: var(--muted); background: var(--raised); border-radius: 999px; padding: 1px 8px; margin-left: 6px; }
+  /* On a phone each component stacks: its name, then what it does; no sideways scrolling. */
+  @media (max-width: 560px) {
+    table { min-width: 0; }
+    table, tbody, tr, th, td { display: block; }
+    tr { padding: 12px 16px; border-top: 1px solid var(--border); }
+    tr:first-child { border-top: 0; }
+    th, td { padding: 0; border-top: 0; }
+    th { white-space: normal; margin-bottom: 3px; }
+  }
+  .tag { display: inline-block; font-size: 11.5px; font-weight: 600; color: var(--muted); background: var(--raised); border-radius: 999px; padding: 1px 8px; margin-left: 2px; }
 
   footer { margin-top: 84px; padding: 28px 0 44px; border-top: 1px solid var(--border); color: var(--faint); font-size: 13.5px; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; }
@@ -376,9 +408,17 @@
         </a>
         <ol>
           <li>Open the file and drag <b>Meetiline</b> to <b>Applications</b>.</li>
-          <li>The first time, macOS asks you to confirm: <b>System Settings</b> › <b>Privacy &amp; Security</b> › <span class="k">Open Anyway</span>.</li>
+          <li>Open it. If macOS says <b>“Meetiline” Not Opened</b>, <span class="nw">press <span class="mb">Done</span>.</span><br>Not Move to Trash: nothing is wrong.</li>
+          <li>Open <span class="mac"><i class="mi gear" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.76 4.20L11.09 1.84L12.91 1.84L13.24 4.20L14.83 4.62L16.29 2.75L17.87 3.65L16.97 5.86L18.14 7.03L20.35 6.13L21.25 7.71L19.38 9.17L19.80 10.76L22.16 11.09L22.16 12.91L19.80 13.24L19.38 14.83L21.25 16.29L20.35 17.87L18.14 16.97L16.97 18.14L17.87 20.35L16.29 21.25L14.83 19.38L13.24 19.80L12.91 22.16L11.09 22.16L10.76 19.80L9.17 19.38L7.71 21.25L6.13 20.35L7.03 18.14L5.86 16.97L3.65 17.87L2.75 16.29L4.62 14.83L4.20 13.24L1.84 12.91L1.84 11.09L4.20 10.76L4.62 9.17L2.75 7.71L3.65 6.13L5.86 7.03L7.03 5.86L6.13 3.65L7.71 2.75L9.17 4.62Z" fill="currentColor" stroke="currentColor" stroke-width=".7" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.6" fill="#e4e4e8"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/></svg></i>System Settings</span> <span class="sep">›</span> <span class="mac"><i class="mi hand" aria-hidden="true"><svg viewBox="0 0 24 24"><g stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M8.7 12V7.4M11.4 11.6V5.2M14.1 11.6V5.8M16.7 12.4V8.3"/></g><path fill="#fff" d="M7.55 10.9h10.3v4.5c0 3.1-2.3 5.3-5.3 5.3h-.9c-1.6 0-2.9-.7-3.9-1.9l-3-3.7a1.25 1.25 0 0 1 1.9-1.6l.9 1z"/></svg></i>Privacy &amp; Security</span>, scroll to the bottom and <span class="nw">press <span class="mb">Open Anyway</span>.</span><br>Press it once more in the window that follows.</li>
         </ol>
         <p class="why">Meetiline is not yet signed with an Apple Developer ID, so macOS asks once.</p>
+        <details class="script look"><summary>Show me the windows</summary>
+          <div class="shots">
+            <figure><div class="mock"><svg class="warn" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.27 3.9a2 2 0 0 1 3.46 0l8 13.9A2 2 0 0 1 20 20.8H4a2 2 0 0 1-1.73-3z" fill="#ffc81a"/><path d="M12 9v4.6" stroke="#2a2a2c" stroke-width="2.1" stroke-linecap="round"/><circle cx="12" cy="16.9" r="1.2" fill="#2a2a2c"/></svg><b>“Meetiline” Not Opened</b><span class="btns"><span class="btn">Move to Trash</span><span class="btn go">Done<svg class="cursor" viewBox="0 0 16 22" aria-hidden="true"><path d="M1.5 1.5v15.6l3.9-3.6 2.6 6.1 2.6-1.1-2.6-6h5.4z" fill="#111" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></span></span></div><figcaption><i>1</i>When it first opens</figcaption></figure>
+            <figure><div class="mock"><span class="pane"><i class="mi hand" aria-hidden="true"><svg viewBox="0 0 24 24"><g stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M8.7 12V7.4M11.4 11.6V5.2M14.1 11.6V5.8M16.7 12.4V8.3"/></g><path fill="#fff" d="M7.55 10.9h10.3v4.5c0 3.1-2.3 5.3-5.3 5.3h-.9c-1.6 0-2.9-.7-3.9-1.9l-3-3.7a1.25 1.25 0 0 1 1.9-1.6l.9 1z"/></svg></i>Privacy &amp; Security</span><span class="row">“Meetiline” was blocked to protect your Mac.</span><span class="btns"><span class="btn go">Open Anyway<svg class="cursor" viewBox="0 0 16 22" aria-hidden="true"><path d="M1.5 1.5v15.6l3.9-3.6 2.6 6.1 2.6-1.1-2.6-6h5.4z" fill="#111" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></span></span></div><figcaption><i>2</i>In System Settings</figcaption></figure>
+            <figure><div class="mock"><svg class="warn" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.27 3.9a2 2 0 0 1 3.46 0l8 13.9A2 2 0 0 1 20 20.8H4a2 2 0 0 1-1.73-3z" fill="#ffc81a"/><path d="M12 9v4.6" stroke="#2a2a2c" stroke-width="2.1" stroke-linecap="round"/><circle cx="12" cy="16.9" r="1.2" fill="#2a2a2c"/></svg><b>Open “Meetiline”?</b><span class="btns"><span class="btn">Move to Trash</span><span class="btn go">Open Anyway<svg class="cursor" viewBox="0 0 16 22" aria-hidden="true"><path d="M1.5 1.5v15.6l3.9-3.6 2.6 6.1 2.6-1.1-2.6-6h5.4z" fill="#111" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="btn">Done</span></span></div><figcaption><i>3</i>Right after</figcaption></figure>
+          </div>
+        </details>
       </div>
       <div class="way">
         <h3>One line in Terminal</h3>
@@ -442,11 +482,11 @@
     <h2>What it is made of</h2>
     <div class="table" role="region" aria-label="Components" tabindex="0">
       <table>
-        <tr><th scope="row"><a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp 1.9.2</a></th><td>Speech recognition engine, inside the app<span class="tag">MIT</span></td></tr>
-        <tr><th scope="row"><a href="https://huggingface.co/openai/whisper-large-v3-turbo" target="_blank" rel="noopener">Whisper large-v3 turbo</a></th><td>Speech model by OpenAI, downloaded once and checked by SHA-256<span class="tag">MIT</span></td></tr>
-        <tr><th scope="row"><a href="https://github.com/snakers4/silero-vad" target="_blank" rel="noopener">Silero VAD 5.1.2</a></th><td>Finds where people speak<span class="tag">MIT</span></td></tr>
-        <tr><th scope="row"><a href="https://github.com/FluidInference/FluidAudio" target="_blank" rel="noopener">FluidAudio 0.17.5</a></th><td>Tells the voices apart, with the <a href="https://huggingface.co/pyannote/speaker-diarization-community-1" target="_blank" rel="noopener">pyannote community-1</a> models<span class="tag">Apache 2.0</span><span class="tag">CC BY 4.0</span></td></tr>
-        <tr><th scope="row"><a href="https://developer.apple.com/documentation/avfoundation" target="_blank" rel="noopener">AVFoundation</a>, <a href="https://developer.apple.com/documentation/vision" target="_blank" rel="noopener">Vision</a>, <a href="https://developer.apple.com/metal/" target="_blank" rel="noopener">Metal</a></th><td>Video, text on screenshots, speed<span class="tag">macOS</span></td></tr>
+        <tr><th scope="row"><a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp 1.9.2</a></th><td>Speech recognition engine, inside the app <span class="tag">MIT</span></td></tr>
+        <tr><th scope="row"><a href="https://huggingface.co/openai/whisper-large-v3-turbo" target="_blank" rel="noopener">Whisper large-v3 turbo</a></th><td>Speech model by OpenAI, downloaded once and checked by SHA-256 <span class="tag">MIT</span></td></tr>
+        <tr><th scope="row"><a href="https://github.com/snakers4/silero-vad" target="_blank" rel="noopener">Silero VAD 5.1.2</a></th><td>Finds where people speak <span class="tag">MIT</span></td></tr>
+        <tr><th scope="row"><a href="https://github.com/FluidInference/FluidAudio" target="_blank" rel="noopener">FluidAudio 0.17.5</a></th><td>Tells the voices apart, with the <a href="https://huggingface.co/pyannote/speaker-diarization-community-1" target="_blank" rel="noopener">pyannote community-1</a> models <span class="tag">Apache 2.0</span> <span class="tag">CC BY 4.0</span></td></tr>
+        <tr><th scope="row"><a href="https://developer.apple.com/documentation/avfoundation" target="_blank" rel="noopener">AVFoundation</a>, <a href="https://developer.apple.com/documentation/vision" target="_blank" rel="noopener">Vision</a>, <a href="https://developer.apple.com/metal/" target="_blank" rel="noopener">Metal</a></th><td>Video, text on screenshots, speed <span class="tag">macOS</span></td></tr>
       </table>
     </div>
   </section>
