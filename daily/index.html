@@ -360,7 +360,7 @@
         <div class="slide"><picture><source srcset="slides/2-moment.avif" type="image/avif"><source srcset="slides/2-moment.webp" type="image/webp"><img class="dk" src="slides/2-moment.jpg" width="2400" height="1376" alt="A screenshot picked in the list, the video at that moment and the words said around it" loading="lazy"></picture><picture><source srcset="slides/2-moment-light.avif" type="image/avif"><source srcset="slides/2-moment-light.webp" type="image/webp"><img class="lt" src="slides/2-moment-light.jpg" width="2400" height="1376" alt="A screenshot picked in the list, the video at that moment and the words said around it" loading="lazy"></picture></div>
         <div class="slide"><picture><source srcset="slides/4-speakers.avif" type="image/avif"><source srcset="slides/4-speakers.webp" type="image/webp"><img class="dk" src="slides/4-speakers.jpg" width="2400" height="1376" alt="A speaker being named in the transcript; the same name appears over all their words" loading="lazy"></picture><picture><source srcset="slides/4-speakers-light.avif" type="image/avif"><source srcset="slides/4-speakers-light.webp" type="image/webp"><img class="lt" src="slides/4-speakers-light.jpg" width="2400" height="1376" alt="A speaker being named in the transcript; the same name appears over all their words" loading="lazy"></picture></div>
       </div>
-      <figcaption class="note"><span class="tip" tabindex="0" aria-describedby="tip-sample">Sample<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-sample">The first picture is the real app showing a made-up call (the people are drawn). The meeting in the others is a public sample: <a href="https://www.drupal.org/project/drupal/issues/3625965" target="_blank" rel="noopener">Drupal Usability Meeting, 2 October 2026</a> by Benji Fisher (CC BY), processed by Meetiline.</span></span></figcaption>
+      <figcaption class="note" id="sample-note" style="visibility:hidden"><span class="tip" tabindex="0" aria-describedby="tip-sample">Sample<span class="tip-i" aria-hidden="true">i</span><span class="tip-box" role="tooltip" id="tip-sample">A public sample: <a href="https://www.drupal.org/project/drupal/issues/3625965" target="_blank" rel="noopener">Drupal Usability Meeting, 2 October 2026</a> by Benji Fisher (CC BY), processed by Meetiline.</span></span></figcaption>
       <div class="tour-text" aria-live="polite"><div><span>You and the others on two tracks, and your screen. Nothing to press.</span></div></div>
       <div class="tour-tabs" role="tablist" aria-label="Choose a step">
         <button role="tab" type="button" aria-selected="true" tabindex="0">Records by itself</button>
@@ -545,6 +545,7 @@
     function show(i) {
       now = (i + steps.length) % steps.length;
       imgs.forEach(function (img, k) { img.classList.toggle('on', k === now); });
+      var note = document.getElementById('sample-note'); if (note) note.style.visibility = now === 0 ? 'hidden' : '';
       tabs.forEach(function (tab, k) { tab.setAttribute('aria-selected', k === now ? 'true' : 'false'); tab.tabIndex = k === now ? 0 : -1; });
       var box = text.firstElementChild; box.style.opacity = 0;
       setTimeout(function () { box.innerHTML = '<span></span>'; box.firstChild.textContent = steps[now][1]; box.style.opacity = 1; }, 220);
