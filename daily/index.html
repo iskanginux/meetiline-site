@@ -57,14 +57,9 @@
   .hero::before { content: ""; position: absolute; left: 50%; top: 0; width: min(760px, 100%); height: 420px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255,69,58,.20), rgba(255,69,58,.07) 55%, transparent); pointer-events: none; }
   .hero > * { position: relative; }
   .hero img.icon { width: 92px; height: 92px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
-  /* The icon has a light variant for the light theme, chosen the same way as the screenshots. */
-  .hero img.icon.lt { display: none; }
-  :root[data-theme="light"] .hero img.icon.dk { display: none; }
-  :root[data-theme="light"] .hero img.icon.lt { display: inline-block; }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .hero img.icon.dk { display: none; }
-    :root:not([data-theme="dark"]) .hero img.icon.lt { display: inline-block; }
-  }
+  /* One icon for both themes: its own tile shape, with a softer shadow on the light page. */
+  :root[data-theme="light"] .hero img.icon { filter: drop-shadow(0 10px 18px rgba(20,20,40,.22)); }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .hero img.icon { filter: drop-shadow(0 10px 18px rgba(20,20,40,.22)); } }
   h1 { font-size: clamp(28px, 4.6vw, 38px); line-height: 1.08; letter-spacing: -0.03em; margin: 12px 0 8px; text-wrap: balance; }
   .sub { color: var(--muted); font-size: clamp(15.5px, 2vw, 18px); margin: 0 auto 18px; max-width: 640px; line-height: 1.38; text-wrap: balance; }
   .button { display: inline-flex; align-items: center; gap: 9px; background: var(--blue); color: #fff; font-weight: 600; font-size: 16px; padding: 11px 24px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; box-shadow: 0 8px 24px rgba(10,132,255,.35); }
@@ -339,7 +334,7 @@
 <main id="main">
 <div class="wrap" id="top">
   <div class="hero">
-    <img class="icon dk" src="icon-v4.png" alt="Meetiline Daily app icon" width="124" height="124">
+    <img class="icon" src="icon-v4.png" alt="Meetiline Daily app icon" width="124" height="124">
     <h1>Your calls remember themselves</h1>
     <p class="sub">Records every call by itself, you and the others on two separate tracks. Later, just ask your AI what was said.</p>
     <a class="button" href="https://github.com/iskanginux/meetiline-daily-site/releases/latest/download/Meetiline-Daily.dmg" data-download>
