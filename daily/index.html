@@ -57,9 +57,16 @@
   .hero::before { content: ""; position: absolute; left: 50%; top: 0; width: min(760px, 100%); height: 420px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255,69,58,.20), rgba(255,69,58,.07) 55%, transparent); pointer-events: none; }
   .hero > * { position: relative; }
   .hero img.icon { width: 92px; height: 92px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
-  /* One icon for both themes: its own tile shape, with a softer shadow on the light page. */
-  :root[data-theme="light"] .hero img.icon { filter: drop-shadow(0 10px 18px rgba(20,20,40,.22)); }
-  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .hero img.icon { filter: drop-shadow(0 10px 18px rgba(20,20,40,.22)); } }
+  /* Two tiles: the dark one, and a light one for the light page (like the main Meetiline site). */
+  .hero .icon-lt { display: none; }
+  :root[data-theme="light"] .hero .icon-dk { display: none; }
+  :root[data-theme="light"] .hero .icon-lt { display: inline; }
+  :root[data-theme="light"] .hero img.icon { filter: drop-shadow(0 10px 18px rgba(20,20,40,.18)); }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .hero .icon-dk { display: none; }
+    :root:not([data-theme="dark"]) .hero .icon-lt { display: inline; }
+    :root:not([data-theme="dark"]) .hero img.icon { filter: drop-shadow(0 10px 18px rgba(20,20,40,.18)); }
+  }
   h1 { font-size: clamp(28px, 4.6vw, 38px); line-height: 1.08; letter-spacing: -0.03em; margin: 12px 0 8px; text-wrap: balance; }
   .sub { color: var(--muted); font-size: clamp(15.5px, 2vw, 18px); margin: 0 auto 18px; max-width: 640px; line-height: 1.38; text-wrap: balance; }
   .button { display: inline-flex; align-items: center; gap: 9px; background: var(--blue); color: #fff; font-weight: 600; font-size: 16px; padding: 11px 24px; border-radius: 999px; text-decoration: none; transition: transform .12s, filter .12s; box-shadow: 0 8px 24px rgba(10,132,255,.35); }
@@ -334,7 +341,8 @@
 <main id="main">
 <div class="wrap" id="top">
   <div class="hero">
-    <img class="icon" src="icon-v4.png" alt="Meetiline Daily app icon" width="124" height="124">
+    <img class="icon icon-dk" src="icon-v4.png" alt="Meetiline Daily app icon" width="124" height="124">
+    <picture class="icon-lt"><source srcset="icon-light-v1.avif" type="image/avif"><source srcset="icon-light-v1.webp" type="image/webp"><img class="icon" src="icon-light-v1.png" alt="Meetiline Daily app icon" width="124" height="124"></picture>
     <h1>Your calls remember themselves</h1>
     <p class="sub">Records every call by itself, you and the others on two separate tracks. Later, just ask your AI what was said.</p>
     <a class="button" href="https://github.com/iskanginux/meetiline-daily-site/releases/latest/download/Meetiline-Daily.dmg" data-download>
@@ -346,7 +354,7 @@
       <span class="badge">Free beta</span>
       <span class="badge">macOS 14.2 or later</span>
       <span class="badge">Apple silicon (M1 and newer)</span>
-      <span class="badge" id="version">Version 0.4.4</span>
+      <span class="badge" id="version">Version 0.4.5</span>
     </div>
     <figure class="tour" id="tour" aria-roledescription="carousel" aria-label="Meetiline Daily, step by step">
       <div class="tour-frame">
@@ -494,7 +502,7 @@
 
 <footer>
   <div class="wrap">
-    <span id="foot-version">Meetiline Daily 0.4.4 · Made by Iskandar Gubaydullin</span>
+    <span id="foot-version">Meetiline Daily 0.4.5 · Made by Iskandar Gubaydullin</span>
     <span><a href="license.txt">Licence</a> · <a href="licences.txt">Open-source licences</a> · <a href="https://iskan.kz">iskan.kz</a></span>
   </div>
 </footer>
